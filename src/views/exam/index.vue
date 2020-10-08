@@ -1,6 +1,6 @@
 <template>
   <div class="homePage">
-    123123
+    exam
   </div>
 </template>
 

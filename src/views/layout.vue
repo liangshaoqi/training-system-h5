@@ -1,9 +1,6 @@
 <template>
   <div>
     <Head ref="head"></Head>
-    <div class="container-view">
-      <router-view></router-view>
-    </div>
     <Footer ref=footer></Footer>
   </div>
 </template>
@@ -21,7 +18,4 @@ export default {
 </script>
 
 <style lang='scss'>
-  .container-view {
-    padding-top: .73rem;
-  }
 </style>

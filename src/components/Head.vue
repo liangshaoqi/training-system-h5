@@ -1,7 +1,5 @@
 <template>
-  <header class="header-box">
-    header
-  </header>
+  <mt-header fixed title="2019年度"></mt-header>
 </template>
 
 <script>
@@ -14,9 +12,3 @@ export default {
   },
 }
 </script>
-
-<style lang='scss'>
-  .header-box {
-    
-  }
-</style>
