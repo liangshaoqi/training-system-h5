@@ -13,7 +13,7 @@ export default {
 <style lang='scss'>
   #app {
     font-size: .14rem;
-    background: #ffffff;
+    background: #f6f6f6;
     min-height: 100vh;
   }
 </style>

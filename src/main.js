@@ -1,7 +1,13 @@
 import Vue from 'vue'
 import router from 'src/route'
 import App from './App.vue'
+import { Field, Button, Header } from 'mint-ui'
+import 'mint-ui/lib/style.css'
 import './assets/reset.css'
+
+Vue.component(Field.name, Field)
+Vue.component(Button.name, Button)
+Vue.component(Header.name, Header)
 
 Vue.config.productionTip = false
 
