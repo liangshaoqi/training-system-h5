@@ -1,6 +1,6 @@
 <template>
-  <div class="learn-box">
-    learn
+  <div class="regist-success-box">
+    regist-success
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 }
 </script>
 <style lang='scss'>
-  .learn-box {
+  .regist-success-box {
     
   }
 </style>

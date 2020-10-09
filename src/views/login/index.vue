@@ -39,7 +39,7 @@
 
     <div class="forgetPwd" @click="toForgetPwd">忘记密码？</div>
     <mt-button type="primary" class="loginBtn">登录</mt-button>
-    <div class="regist">激活账号</div>
+    <div class="regist" @click="$router.push('/regist')">激活账号</div>
 
     <div class="note" v-if="showNote">
       <h2>关于2019年度成都市导游人员提升培训工作的声明</h2>
