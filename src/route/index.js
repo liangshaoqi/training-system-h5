@@ -8,6 +8,8 @@ import Regist from 'src/views/regist';
 import RegistSuccess from 'src/views/registSuccess'
 
 import Learn from 'src/views/learn';
+import LearnList from 'src/views/learnList';
+import LearnDetails from 'src/views/learnDetails';
 import Exam from 'src/views/exam';
 import My from 'src/views/my';
 
@@ -47,6 +49,14 @@ const routes = [
   {
     path: '/regist-success',
     component: RegistSuccess,
+  },
+  {
+    path: '/learnList',
+    component: LearnList,
+  },
+  {
+    path: '/learnDetails',
+    component: LearnDetails,
   },
 ];
 const router = new Router({
