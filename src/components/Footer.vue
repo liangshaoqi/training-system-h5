@@ -1,8 +1,5 @@
 <template>
   <div class="footer-box">
-    <div class="container-view">
-      <router-view></router-view>
-    </div>
     <mt-tabbar fixed v-model="selected">
       <mt-tab-item id="/learn">
         <img slot="icon" :src="selected === '/learn' ? require('../assets/tabbar/learn-active.png') : require('../assets/tabbar/learn.png')" alt="">
@@ -44,10 +41,5 @@ export default {
 }
 </script>
 <style lang='scss'>
-  .footer-box {
-    .container-view {
-      padding-top: .4rem;
-      padding-bottom: .6rem;
-    }
-  }
+
 </style>
