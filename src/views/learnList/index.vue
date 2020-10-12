@@ -12,7 +12,7 @@
     </div>
 
     <div class="list-container" v-else>
-      <div class="learn-item">
+      <div class="learn-item" @click="$router.push('/learnDetails')">
         <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
         <div class="to-learn">去学习&gt;&gt;</div>
@@ -44,9 +44,6 @@ export default {
     return {
       list: [],
     };
-  },
-  mounted() {
-    window.scrollTo(0, 0);
   },
   mounted () {
     this.list = [1,2]

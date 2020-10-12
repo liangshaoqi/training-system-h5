@@ -1,8 +1,10 @@
 <template>
   <div class="my-box">
     <div>
-      <img :src="require('../../assets/my/headImg.png')" alt="">
-      <div>
+      <div class="name">
+        <span>姓名</span>
+      </div>
+      <div class="info">
         <div>电子导游证：XXXX</div>
         <div>已在线学习时长： XX小时</div>
         <div>还需学习时长： XX小时</div>
@@ -32,11 +34,11 @@ export default {
       display: flex;
       flex-flow: column;
       align-items: center;
-      img {
+      > .name {
         width: .8rem;
         height: .8rem;
       }
-      > div {
+      > .info {
         font-size: .15rem;
         line-height: .25rem;
         margin: .2rem;
