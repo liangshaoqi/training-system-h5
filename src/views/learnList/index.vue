@@ -13,19 +13,16 @@
 
     <div class="list-container" v-else>
       <div class="learn-item" @click="$router.push('/learnDetails')">
-        <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
         <div class="to-learn">去学习&gt;&gt;</div>
       </div>
 
       <div class="learn-item">
-        <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
         <div class="to-learn">去学习&gt;&gt;</div>
       </div>
 
       <div class="learn-item">
-        <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
         <div class="to-learn">去学习&gt;&gt;</div>
       </div>

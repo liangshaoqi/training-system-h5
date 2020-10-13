@@ -38,7 +38,7 @@
     </div>
 
     <div class="forgetPwd" @click="toForgetPwd">忘记密码？</div>
-    <mt-button type="primary" class="loginBtn">登录</mt-button>
+    <mt-button type="primary" class="loginBtn" @click="Login">登录</mt-button>
     <div class="regist" @click="$router.push('/regist')">激活账号</div>
 
     <div class="note" v-if="showNote">
@@ -68,6 +68,9 @@ export default {
     };
   },
   methods: {
+    Login () {
+      this.$router.push('/my');
+    },
     closeNote () {
       this.showNote = false
     },

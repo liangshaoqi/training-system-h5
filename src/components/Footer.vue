@@ -7,7 +7,7 @@
       </mt-tab-item>
       <mt-tab-item id="/exam">
         <img slot="icon" :src="selected === '/exam' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
-        考试
+        测试
       </mt-tab-item>
       <mt-tab-item id="/my">
         <img slot="icon" :src="selected === '/my' ? require('../assets/tabbar/my-active.png') : require('../assets/tabbar/my.png')" alt="">
