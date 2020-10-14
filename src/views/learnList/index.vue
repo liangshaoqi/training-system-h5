@@ -15,19 +15,19 @@
       <div class="learn-item" @click="$router.push('/learnDetails')">
         <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
-        <div class="to-learn">去学习&gt;&gt;</div>
+        <div class="to-learn"><span>去学习&gt;&gt;</span></div>
       </div>
 
       <div class="learn-item">
         <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
-        <div class="to-learn">去学习&gt;&gt;</div>
+        <div class="to-learn"><span>去学习&gt;&gt;</span></div>
       </div>
 
       <div class="learn-item">
         <span class="learned">已学习</span>
         <h3 class="title">旅游突发事件应急处理1</h3>
-        <div class="to-learn">去学习&gt;&gt;</div>
+        <div class="to-learn"><span>去学习&gt;&gt;</span></div>
       </div>
 
       <div class="learn-pdf">
@@ -103,6 +103,21 @@ export default {
       background: url('../../assets/learn/learn-bg.png') no-repeat 50%;
       background-size: cover;
       box-sizing: border-box;
+      position: relative;
+      span {
+        position: relative;
+        z-index: 1;
+      }
+      &::after {
+        display: block;
+        content: ' ';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba($color: #000000, $alpha: .3);
+      }
     }
 
     .learn-pdf {
