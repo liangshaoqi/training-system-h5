@@ -1,6 +1,6 @@
 <template>
   <div class="learn-details-box">
-    <mt-header fixed title="2020成都">
+    <mt-header fixed title="2020成都市导游人员提升培训系统">
       <router-link to="" slot="left">
         <mt-button icon="back" @click="$router.back(-1)"></mt-button>
       </router-link>

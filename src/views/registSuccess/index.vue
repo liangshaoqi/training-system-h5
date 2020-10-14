@@ -8,7 +8,7 @@
 
     <img :src="require('../../assets/regist/success.png')" alt="">
     <div class="tips">激活成功</div>
-    <mt-button type="primary" style="width: 2rem; margin: 0 auto;" @click="$router.replace('/login')">去登陆</mt-button>
+    <mt-button type="primary" style="width: 2rem; margin: 0 auto;" @click="$router.replace('/login')">去登录</mt-button>
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="login-box">
     <div class="login-bg">
+      <div class="app-title">2020成都市导游人员提升培训系统</div>
       <div class="login-title">
         <div class="login-title-line"></div>
         <div class="login-title-text">登 · 录</div>
@@ -10,9 +11,9 @@
       <div class="login-form">
         <mt-field
           label=""
-          placeholder="请输入已激活的手机号"
+          placeholder="请输入已激活的身份证号"
           type="tel"
-          v-model="mobile"
+          v-model="cardNo"
           style="margin-bottom: .5rem"
         >
           <img
@@ -38,20 +39,20 @@
         </mt-field>
       </div>
 
-      <mt-button type="primary" class="loginBtn">登录</mt-button>
+      <mt-button type="primary" class="loginBtn" @click="Login">登录</mt-button>
       <div class="regist" @click="$router.push('/regist')">激活账号</div>
 
       <div class="note" v-if="showNote">
-        <h2>关于2019年度成都市导游人员提升培训工作的声明</h2>
+        <h2>关于2020年度成都市导游人员提升培训工作的声明</h2>
         <section>
-          第一、依据“《导游管理办法》第三十一条：各级旅游主管部门应当积极组织开展导游培训，培训内容应当包括政策法规、安全生产、突发事件应对和文明服务等，培训方式可以包括培训班、专题讲座和网络在线培训等，每年累计培训时间不得少于24小时。培训不得向参加人员收取费用。”的规定，由成都市文化广电旅游局针对全市已经换发电子导游证的导游人员组织开展的“2019年度成都市导游人员提升培训工作的网络培训”为“免费培训”，任何单位或个人不得非法冒用、借用旅游行政管理部门的名义收取培训相关费用，以达到非法敛财的目的。一经发现，将联合相关部门，依法严厉惩处。
+          第一、依据“《导游管理办法》第三十一条：各级旅游主管部门应当积极组织开展导游培训，培训内容应当包括政策法规、安全生产、突发事件应对和文明服务等，培训方式可以包括培训班、专题讲座和网络在线培训等，每年累计培训时间不得少于24小时。培训不得向参加人员收取费用。”的规定，由成都市文化广电旅游局针对全市已经换发电子导游证的导游人员组织开展的“2020年度成都市导游人员提升培训工作的网络培训”为“免费培训”，任何单位或个人不得非法冒用、借用旅游行政管理部门的名义收取培训相关费用，以达到非法敛财的目的。一经发现，将联合相关部门，依法严厉惩处。
         </section>
         <br />
         <section>
-          第二、任何单位或个人借“成都市文化广电旅游局组织开展的《2019年度成都市导游人员提升培训工作》”用非正当方式获取利益的，可收集提供相关证据向当地公安机关进行举报。
+          第二、任何单位或个人借“成都市文化广电旅游局组织开展的《2020年度成都市导游人员提升培训工作》”用非正当方式获取利益的，可收集提供相关证据向当地公安机关进行举报。
         </section>
         <br />
-        <p style="float: right;">2019年10月30日</p>
+        <p style="float: right;">2020年10月30日</p>
         <mt-button type="primary" @click="closeNote" style="width: 100%">确定</mt-button>
       </div>
     </div>
@@ -59,24 +60,30 @@
 </template>
 
 <script>
+import { login } from 'api/login';
+
 export default {
   name: "login",
   data() {
     return {
-      mobile: "",
-      password: "",
+      cardNo: localStorage.getItem('cardNo') || '',
+      password: '',
       showNote: true,
     };
   },
   methods: {
     Login () {
-      this.$router.push('/my');
+      login({
+        cardNo: this.cardNo,
+        password: this.password
+      }).then(res => {
+        if (res.code === '200') {
+          this.$router.push('/my');
+        }
+      })
     },
     closeNote () {
       this.showNote = false
-    },
-    toForgetPwd () {
-      this.$router.push('/forgetPwd');
     }
   }
 };
@@ -89,18 +96,24 @@ export default {
   overflow: hidden;
   background: url("../../assets/login/loginBg.png");
   background-size: cover;
-  background-position: bottom;
+  background-position: top;
   content: "viewport-units-buggyfill; min-height: 100vh";
   .login-bg {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background: rgba($color: #000000, $alpha: .3);
     padding: .5rem 12vw 0;
+  }
+  .app-title {
+    font-size: .26rem;
+    line-height: .36rem;
+    color: #fff;
+    text-align: center;
   }
   .login-title {
     display: flex;
     align-items: center;
-    margin: 0 0 1rem;
+    margin: .2rem 0 1rem;
     .login-title-line {
       height: 1px;
       width: 32%;

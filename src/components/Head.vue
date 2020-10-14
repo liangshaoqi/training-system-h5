@@ -1,5 +1,5 @@
 <template>
-  <mt-header fixed title="2019年度"></mt-header>
+  <mt-header fixed title="2020成都市导游人员提升培训系统"></mt-header>
 </template>
 
 <script>

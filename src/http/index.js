@@ -1,7 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
 import baseUrl from 'src/config/url_config';
-import payUrl from 'src/config/pay_url';
 import { Toast } from 'mint-ui';
 // axios.defaults.baseURL = baseUrl;
 const service = axios.create({
@@ -40,8 +39,7 @@ service.interceptors.response.use(
     // 以下判断根据每个项目不同状态码做出不同处理
     if (response.data.code && response.data.code != 200) {
       Toast({
-        message: response.data.msg,
-        iconClass: 'icon icon-error'
+        message: response.data.msg
       });
       return Promise.reject(response)
     } else {
@@ -78,13 +76,11 @@ service.interceptors.response.use(
           break;
       }
       Toast({
-        message: errMsg,
-        iconClass: 'icon icon-error'
+        message: errMsg
       });
     } else {
       Toast({
-        message: '服务器错误',
-        iconClass: 'icon icon-error'
+        message: '服务器错误'
       });
     }
    
@@ -117,12 +113,4 @@ export function FILE(url, data = {}) {
     method: 'post',
     file: true,
   });
-}
-export function PAY(data = {}) {
-  return service({
-    baseURL: payUrl,
-    data: data,
-    method: 'post',
-    pay: true
-  })
 }
