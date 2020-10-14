@@ -35,13 +35,19 @@ export default {
       flex-flow: column;
       align-items: center;
       > .name {
-        width: .8rem;
-        height: .8rem;
+        width: 1rem;
+        height: 1rem;
+        background: #0d97e6;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       > .info {
         font-size: .15rem;
         line-height: .25rem;
-        margin: .2rem;
+        margin: .4rem .2rem .5rem;
       }
     }
   }

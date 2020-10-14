@@ -69,6 +69,9 @@ export default {
     };
   },
   methods: {
+    Login () {
+      this.$router.push('/my');
+    },
     closeNote () {
       this.showNote = false
     },
