@@ -61,6 +61,7 @@
 
 <script>
 import { login } from 'api/login';
+import { setTokenLoc, setUserInfo, setCardNo } from 'utils/storage';
 
 export default {
   name: "login",
@@ -76,8 +77,13 @@ export default {
       login({
         cardNo: this.cardNo,
         password: this.password
-      }).then(res => {
-        if (res.code === '200') {
+      }).then(async res => {
+        const { code, data = {} } = res;
+
+        if (code === '200') {
+          await setTokenLoc(data.token || '');
+          await setUserInfo(data || {});
+          await setCardNo(data.cardNo || '');
           this.$router.push('/my');
         }
       })

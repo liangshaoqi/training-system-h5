@@ -13,6 +13,7 @@ service.interceptors.request.use(
     config.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     config.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
     config.headers.delete['Content-Type'] = 'application/x-www-form-urlencoded';
+    config.headers.token = localStorage.getItem('token');
     // 判断请求方式
     // if(config.file){
     //   config.headers['Content-Type'] = 'multipart/form-data'
@@ -37,11 +38,15 @@ service.interceptors.response.use(
   // 成功回调
   (response) => {
     // 以下判断根据每个项目不同状态码做出不同处理
-    if (response.data.code && response.data.code != 200) {
-      Toast({
-        message: response.data.msg
-      });
-      return Promise.reject(response)
+    if (response.data.code && response.data.code != '200') {
+      if (response.data.code === 'E10005') {
+        window.location.replace('#/login');
+      } else {
+        Toast({
+          message: response.data.msg
+        });
+        return Promise.reject(response)
+      }
     } else {
       return response.data
     }

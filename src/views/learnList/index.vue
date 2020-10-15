@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import { getLearnList } from 'api/learn';
+import { getCardNo } from 'utils/storage';
+
 export default {
   components: {},
   data() {
@@ -43,8 +46,19 @@ export default {
     };
   },
   mounted () {
-    this.list = [1,2]
+    this.getLearnListFunc()
   },
+  methods: {
+    getLearnListFunc () {
+      getLearnList({
+        cardNo: getCardNo() || ''
+      }).then(res => {
+        if (res.code === '200') {
+          this.list = res.data || []
+        }
+      })
+    }
+  }
 };
 </script>
 <style lang='scss'>
