@@ -5,25 +5,64 @@
         <span>姓名</span>
       </div>
       <div class="info">
-        <div>电子导游证：XXXX</div>
-        <div>已在线学习时长： XX小时</div>
-        <div>还需学习时长： XX小时</div>
-        <div>培训状态：已通过/未通过</div>
+        <div>电子导游证：{{info.cardNo}}</div>
+        <div>已在线学习时长： {{getTime(info.workingTime)}}</div>
+        <div>还需学习时长： {{getTime(24 * 60 - info.workingTime)}}</div>
+        <div>培训状态：{{info.status}}</div>
       </div>
-      <mt-button type="primary" style="width: 60vw">退出当前账号</mt-button>
+      <mt-button type="primary" style="width: 60vw" @click="logOutFunc">退出当前账号</mt-button>
     </div>
   </div>
 </template>
 
 <script>
+import { getExamResult } from 'api/my';
+import { logOut } from 'api/login';
+import { getCardNo } from 'utils/storage';
+import { MessageBox, Toast } from 'mint-ui';
+
 export default {
   components: {
   },
   data () {
-    return {}
+    return {
+      info: {}
+    }
   },
   mounted() {
     window.scrollTo(0, 0)
+    this.getExamResultFunc()
+  },
+  methods: {
+    getExamResultFunc () {
+      getExamResult({
+        cardNo: getCardNo() || ''
+      }).then(res => {
+        if (res.code === '200') {
+          this.info = res.data || {}
+        }
+      })
+    },
+    getTime (minute) {
+      let h = parseInt(minute / 60) || 0
+      let m = minute % 60 || 0
+      return h + '小时' + m + '分钟'
+    },
+    logOutFunc () {
+      MessageBox.confirm('确认退出当前账号?').then(action => {
+        if (action === 'confirm') {
+          logOut({
+            cardNo: localStorage.getItem('cardNo')
+          }).then(res => {
+            if (res.code === '200') {
+              localStorage.clear()
+              Toast('已退出，请重新登录')
+              this.$router.push('/login')
+            }
+          })
+        }
+      })
+    }
   }
 }
 </script>

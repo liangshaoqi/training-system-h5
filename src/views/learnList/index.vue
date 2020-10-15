@@ -1,62 +1,50 @@
 <template>
   <div class="learn-list-box">
-    <mt-header fixed title="2020成都市导游人员提升培训系统">
+    <mt-header fixed :title="title || '2020成都市导游人员提升培训系统'">
       <router-link to="" slot="left">
         <mt-button icon="back" @click="$router.back(-1)"></mt-button>
       </router-link>
     </mt-header>
 
-    <div class="spinner-box" v-if="list.length <= 0">
-      <mt-spinner type="triple-bounce" :size="58"></mt-spinner>
-      <div>加载中...</div>
-    </div>
+    <div class="list-container">
+      <template v-for="(item, idx) in list">
+        <div class="learn-item" v-if="item.type === 'MP4'" :key="idx" @click="toLearnDetails(item.url)">
+          <h3 class="title">{{item.level3}}</h3>
+          <div class="to-learn"><span>去学习&gt;&gt;</span></div>
+        </div>
 
-    <div class="list-container" v-else>
-      <div class="learn-item" @click="$router.push('/learnDetails')">
-        <h3 class="title">旅游突发事件应急处理1</h3>
-        <div class="to-learn"><span>去学习&gt;&gt;</span></div>
-      </div>
-
-      <div class="learn-item">
-        <h3 class="title">旅游突发事件应急处理1</h3>
-        <div class="to-learn"><span>去学习&gt;&gt;</span></div>
-      </div>
-
-      <div class="learn-item">
-        <h3 class="title">旅游突发事件应急处理1</h3>
-        <div class="to-learn"><span>去学习&gt;&gt;</span></div>
-      </div>
-
-      <div class="learn-pdf">
-        <mt-cell title="旅游突发事件应急手册" is-link></mt-cell>
-      </div>
+        <div class="learn-pdf" v-else :key="idx" @click="toPDF(item.url)">
+          <mt-cell :title="item.level3" is-link></mt-cell>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
-import { getLearnList } from 'api/learn';
-import { getCardNo } from 'utils/storage';
-
 export default {
   components: {},
   data() {
     return {
       list: [],
+      title: ''
     };
   },
   mounted () {
-    this.getLearnListFunc()
+    const learnList = this.$store.state.learnList || []
+    const pIdx = this.$route.query ? this.$route.query.pIdx : 0
+    const cIdx = this.$route.query ? this.$route.query.cIdx : 0
+    const info = learnList[pIdx].levelSecondInfo[cIdx] || {}
+
+    this.title = info.levelSecond || ''
+    this.list = info.infos || []
   },
   methods: {
-    getLearnListFunc () {
-      getLearnList({
-        cardNo: getCardNo() || ''
-      }).then(res => {
-        if (res.code === '200') {
-          this.list = res.data || []
-        }
-      })
+    toLearnDetails (url) {
+      this.$router.push(`/learnDetails?url=${url}`)
+    },
+    toPDF (url) {
+      window.open(url)
     }
   }
 };
@@ -64,18 +52,6 @@ export default {
 <style lang='scss'>
 .learn-list-box {
   padding: .6rem .2rem.2rem;
-  .spinner-box {
-    margin-top: 1rem;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    > div {
-      color: #ccc;
-      font-size: 0.18rem;
-      line-height: 0.8rem;
-    }
-  }
   .list-container {
     .learn-item {
       background: #fff;
@@ -136,6 +112,7 @@ export default {
       border-radius: .1rem;
       padding: .1rem;
       box-sizing: border-box;
+      margin-bottom: .2rem;
     }
   }
 }

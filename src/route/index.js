@@ -9,6 +9,7 @@ import RegistSuccess from 'src/views/registSuccess'
 
 import Learn from 'src/views/learn';
 import LearnList from 'src/views/learnList';
+import LearnLevelTwo from 'src/views/learnLevelTwo';
 import LearnDetails from 'src/views/learnDetails';
 import Exam from 'src/views/exam';
 import My from 'src/views/my';
@@ -53,6 +54,10 @@ const routes = [
   {
     path: '/learnList',
     component: LearnList,
+  },
+  {
+    path: '/learnLevelTwo',
+    component: LearnLevelTwo,
   },
   {
     path: '/learnDetails',

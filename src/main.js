@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from 'src/route'
 import App from './App.vue'
 import { Field, Button, Header, Tabbar, TabItem, Cell, Radio, Checklist, Spinner } from 'mint-ui'
+import store from 'src/store'
 import 'mint-ui/lib/style.css'
 import './assets/reset.css'
 
@@ -19,5 +20,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

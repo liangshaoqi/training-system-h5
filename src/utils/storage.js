@@ -1,5 +1,4 @@
 const localStorage = window.localStorage;
-const sessionStorage = window.sessionStorage;
 
 const stringify = (data) => {
   return JSON.stringify(data) || '';
@@ -42,4 +41,12 @@ export const getUserInfo = () => {
 
 export const removeUserInfo = () => {
   localStorage.removeItem('userInfo');
+};
+
+export const setLearnList = (data) => {
+  localStorage.setItem('learnList', stringify(data));
+};
+
+export const getLearnList = () => {
+  return parse(localStorage.getItem('learnList'));
 };

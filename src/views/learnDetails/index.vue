@@ -6,13 +6,23 @@
       </router-link>
     </mt-header>
 
-    <video width="100%" id="myVideo" autoplay="autoplay" src="http://test.cdlyfw.qiniu.palmyou.com/o_1dmq3ss0t1bkajeg1fhm1v789pc7.mp4" controls="controls">您的浏览器不支持 video 标签。</video>
+    <iframe
+      :src="url"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+      width="100%"
+      height="100%"
+    >
+    </iframe>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'learn-details'
+  name: 'learn-details',
 }
 </script>
 
