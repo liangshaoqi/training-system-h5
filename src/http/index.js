@@ -39,17 +39,15 @@ service.interceptors.response.use(
   (response) => {
     // 以下判断根据每个项目不同状态码做出不同处理
     if (response.data.code && response.data.code != '200') {
-      if (response.data.code === 'E10005') {
+      if (response.data.code === 'E11007') {
         window.location.replace('#/login');
       } else {
         Toast({
           message: response.data.msg
         });
-        return Promise.reject(response)
       }
-    } else {
-      return response.data
     }
+    return response.data
   },
   (err) => {
     // 错误消息提示

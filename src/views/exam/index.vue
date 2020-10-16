@@ -10,6 +10,7 @@
       <h2>一、单选题</h2>
       <div class="single-box" v-for="(item, idx) in singleList" :key="idx">
         <p>{{idx + 1}}、{{item.stem}}</p>
+        <p v-if="showAnswer && formData[item.uuid] !== item.answer" style="color: red;">正确答案：{{item.answer}}</p>
         <mt-radio
           title=""
           style="margin: .2rem 0;"
@@ -23,6 +24,7 @@
       <h2>二、多选题</h2>
       <div class="single-box" v-for="(item, idx) in multipleList" :key="idx">
         <p>{{idx + 1}}、{{item.stem}}</p>
+        <p v-if="showAnswer && formData[item.uuid] !== item.answer" style="color: red;">正确答案：{{item.answer}}</p>
         <mt-checklist
           title=""
           style="margin: .2rem 0;"
@@ -36,6 +38,7 @@
       <h2>三、判断题</h2>
       <div class="single-box" v-for="(item, idx) in judgmentList" :key="idx">
         <p>{{idx + 1}}、{{item.stem}}</p>
+        <p v-if="showAnswer && formData[item.uuid] !== item.answer" style="color: red;">正确答案：{{item.answer}}</p>
         <mt-radio
           title=""
           style="margin: .2rem 0;"
@@ -63,7 +66,8 @@ export default {
       multipleList: [],
       judgmentList: [],
       formData: {},
-      multipleFormData: {}
+      multipleFormData: {},
+      showAnswer: false
     }
   },
   mounted() {
@@ -76,19 +80,11 @@ export default {
         cardNo: localStorage.getItem('cardNo')
       }).then(res => {
         if (res.code === '200') {
-          const list = res.data || []
-          const singleList = [], multipleList = [], judgmentList = []
+          const list = res.data || {}
+          const singleList = list.listSingle || [],
+            multipleList = list.listMultiple || [],
+            judgmentList = list.listJudge || []
           const multipleFormData = {}
-
-          for (let i of list) {
-            if (i.type === '单选') {
-              singleList.push(i)
-            } else if (i.type === '多选') {
-              multipleList.push(i)
-            } else if (i.type === '判断') {
-              judgmentList.push(i)
-            }
-          }
 
           for (let i of multipleList) {
             multipleFormData[i.uuid] = []
@@ -142,24 +138,7 @@ export default {
         return
       }
 
-      const list = []
-      for (let i in this.formData) {
-        list.push({
-          uuid: i,
-          answer: this.formData[i]
-        })
-      }
-      for (let i in this.multipleFormData) {
-        list.push({
-          uuid: i,
-          answer: this.multipleFormData[i].join(',')
-        })
-      }
-
-      this.submitData(list)
-    },
-    submitData (list) {
-      console.log(list)
+      this.showAnswer = true
     },
     hasDoneMultiple () {
       for (let i in this.multipleFormData) {

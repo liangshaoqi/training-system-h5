@@ -50,3 +50,11 @@ export const setLearnList = (data) => {
 export const getLearnList = () => {
   return parse(localStorage.getItem('learnList'));
 };
+
+export const setExamInfo = (data) => {
+  localStorage.setItem('examInfo', stringify(data));
+};
+
+export const getExamInfo = () => {
+  return parse(localStorage.getItem('examInfo'));
+};

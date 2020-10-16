@@ -2,7 +2,7 @@
   <div class="my-box">
     <div>
       <div class="name">
-        <span>姓名</span>
+        <span>{{info.name}}</span>
       </div>
       <div class="info">
         <div>电子导游证：{{info.cardNo}}</div>
@@ -25,8 +25,11 @@ export default {
   components: {
   },
   data () {
-    return {
-      info: {}
+    return {}
+  },
+  computed: {
+    info () {
+      return this.$store.state.examInfo || {}
     }
   },
   mounted() {
@@ -39,11 +42,11 @@ export default {
         cardNo: getCardNo() || ''
       }).then(res => {
         if (res.code === '200') {
-          this.info = res.data || {}
+          this.$store.commit('setExamInfo', res.data || {})
         }
       })
     },
-    getTime (minute) {
+    getTime (minute = 0) {
       let h = parseInt(minute / 60) || 0
       let m = minute % 60 || 0
       return h + '小时' + m + '分钟'
@@ -56,6 +59,7 @@ export default {
           }).then(res => {
             if (res.code === '200') {
               localStorage.clear()
+              this.$store.commit('setUserInfo', {})
               Toast('已退出，请重新登录')
               this.$router.push('/login')
             }

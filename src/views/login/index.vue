@@ -82,8 +82,8 @@ export default {
 
         if (code === '200') {
           await setTokenLoc(data.token || '');
-          await setUserInfo(data || {});
           await setCardNo(data.cardNo || '');
+          this.$store.commit('setUserInfo', data)
           this.$router.push('/my');
         }
       })

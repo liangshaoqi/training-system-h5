@@ -41,5 +41,7 @@ export default {
 }
 </script>
 <style lang='scss'>
-
+  .footer-box .mint-tabbar {
+    border-top: 1px solid #e6e6e6;
+  }
 </style>
