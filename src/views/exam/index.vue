@@ -8,36 +8,39 @@
 
     <div class="choice">
       <h2>一、单选题</h2>
-      <div class="single-box">
-        <p>1、中国共产党第十九次代表大会报告指出，我国经济已由（）阶段转向（）阶段，正处在转变发展方式、优化经济结构、转换增长动力的攻关期，建设现代化经济体系是跨越关口的迫切要求和我国发展的战略目标。</p>
+      <div class="single-box" v-for="(item, idx) in singleList" :key="idx">
+        <p>{{idx + 1}}、{{item.stem}}</p>
         <mt-radio
           title=""
-          v-model="formData.question1"
-          :options="['optionA', 'optionB', 'optionC']">
+          style="margin: .2rem 0;"
+          v-model="formData[item.uuid]"
+          :options="getOptions(item)">
         </mt-radio>
       </div>
     </div>
 
     <div class="choice">
       <h2>二、多选题</h2>
-      <div class="single-box">
-        <p>7、根据有关旅游法规，下列导游人员的行为中，属于由省、自治区、直辖市人民政府旅游行政管理部门吊销导游证并予以公告的有（）。</p>
+      <div class="single-box" v-for="(item, idx) in multipleList" :key="idx">
+        <p>{{idx + 1}}、{{item.stem}}</p>
         <mt-checklist
-          title="checkbox list"
-          v-model="formData.question2"
-          :options="['optionA', 'optionB', 'optionC']">
+          title=""
+          style="margin: .2rem 0;"
+          v-model="multipleFormData[item.uuid]"
+          :options="getOptions(item)">
         </mt-checklist>
       </div>
     </div>
 
     <div class="choice">
       <h2>三、判断题</h2>
-      <div class="single-box">
-        <p>1、中国共产党第十九次代表大会报告指出，我国经济已由（）阶段转向（）阶段，正处在转变发展方式、优化经济结构、转换增长动力的攻关期，建设现代化经济体系是跨越关口的迫切要求和我国发展的战略目标。</p>
+      <div class="single-box" v-for="(item, idx) in judgmentList" :key="idx">
+        <p>{{idx + 1}}、{{item.stem}}</p>
         <mt-radio
           title=""
-          v-model="formData.question3"
-          :options="['正确', '错误']">
+          style="margin: .2rem 0;"
+          v-model="formData[item.uuid]"
+          :options="getOptions(item)">
         </mt-radio>
       </div>
     </div>
@@ -49,24 +52,122 @@
 
 <script>
 import { Toast } from 'mint-ui';
+import { getExamList } from 'api/exam';
 
 export default {
   components: {
   },
   data () {
     return {
-      formData: {
-        question2: []
-      }
+      singleList: [],
+      multipleList: [],
+      judgmentList: [],
+      formData: {},
+      multipleFormData: {}
     }
   },
   mounted() {
     window.scrollTo(0, 0)
+    this.getExamListFunc()
   },
   methods: {
+    getExamListFunc () {
+      getExamList({
+        cardNo: localStorage.getItem('cardNo')
+      }).then(res => {
+        if (res.code === '200') {
+          const list = res.data || []
+          const singleList = [], multipleList = [], judgmentList = []
+          const multipleFormData = {}
+
+          for (let i of list) {
+            if (i.type === '单选') {
+              singleList.push(i)
+            } else if (i.type === '多选') {
+              multipleList.push(i)
+            } else if (i.type === '判断') {
+              judgmentList.push(i)
+            }
+          }
+
+          for (let i of multipleList) {
+            multipleFormData[i.uuid] = []
+          }
+
+          this.multipleFormData = multipleFormData
+          this.singleList = singleList
+          this.multipleList = multipleList
+          this.judgmentList = judgmentList
+        }
+      })
+    },
+    getOptions (item) {
+      if (!item) return
+      const { optiona, optionb, optionc, optiond, optione } = item
+      const arr = [
+        {
+          label: optiona ? 'A.' + optiona : '',
+          value: 'A'
+        },
+        {
+          label: optionb ? 'B.' + optionb : '',
+          value: 'B'
+        },
+        {
+          label: optionc ? 'C.' + optionc : '',
+          value: 'C'
+        },
+        {
+          label: optiond ? 'D.' + optiond : '',
+          value: 'D'
+        },
+        {
+          label: optione ? 'E.' + optione : '',
+          value: 'E'
+        }
+      ]
+      const options = []
+
+      for (let i of arr) {
+        if (i.label) {
+          options.push(i)
+        }
+      }
+
+      return options
+    },
     submit () {
-      console.log(this.formData)
-      Toast('题没做完，不能交卷')
+      if (Object.keys(this.formData).length < this.singleList.length + this.judgmentList.length || !this.hasDoneMultiple()) {
+        Toast('题没做完，不能交卷')
+        return
+      }
+
+      const list = []
+      for (let i in this.formData) {
+        list.push({
+          uuid: i,
+          answer: this.formData[i]
+        })
+      }
+      for (let i in this.multipleFormData) {
+        list.push({
+          uuid: i,
+          answer: this.multipleFormData[i].join(',')
+        })
+      }
+
+      this.submitData(list)
+    },
+    submitData (list) {
+      console.log(list)
+    },
+    hasDoneMultiple () {
+      for (let i in this.multipleFormData) {
+        if (this.multipleFormData[i].length <= 0) {
+          return false
+        }
+      }
+      return true
     }
   }
 }
