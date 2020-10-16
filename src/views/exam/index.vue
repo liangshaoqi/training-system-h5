@@ -138,6 +138,7 @@ export default {
         return
       }
 
+      Toast('提交成功，请自行核对答案')
       this.showAnswer = true
     },
     hasDoneMultiple () {
