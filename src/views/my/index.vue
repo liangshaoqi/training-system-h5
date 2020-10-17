@@ -47,6 +47,7 @@ export default {
       })
     },
     getTime (minute = 0) {
+      if (minute < 0) return '0小时0分钟'
       let h = parseInt(minute / 60) || 0
       let m = minute % 60 || 0
       return h + '小时' + m + '分钟'
