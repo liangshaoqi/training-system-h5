@@ -5,6 +5,7 @@
 .project
 .settings
 *.iml
+*.zip
 *.apt_generated*
 target
 .classpath

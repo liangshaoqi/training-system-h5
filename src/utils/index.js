@@ -38,3 +38,14 @@ export function timestampToTime(timeStamp, middleStr = '-', type = 'YMD') {
   }
   return Y + M + D + ' ' + h + m + s;
 }
+export const gotoUrlByDevice = () => {
+  let isProd = process.env.NODE_ENV === 'production' ? true : false
+  // 当前设备不是手机(生产环境下)
+  if (!deviceIsMobile() && isProd) {
+    let domain = window.location.host
+    let protocol = window.location.protocol
+    // let domain = 'http://112.126.97.136'
+    let url = protocol + '//' + domain + '/exhibition/#/index'
+    window.location.href = url
+  }
+}

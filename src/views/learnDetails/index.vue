@@ -23,6 +23,11 @@
 <script>
 export default {
   name: 'learn-details',
+  data () {
+    return {
+      url: this.$route.query ? this.$route.query.url : ''
+    }
+  }
 }
 </script>
 
