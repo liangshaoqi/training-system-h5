@@ -56,6 +56,7 @@ export default {
           if (res.code === '200') {
             const examInfo = this.$store.state.examInfo || {}
             examInfo.workingTime = examInfo.workingTime + this.minute
+            examInfo.status = res.data
 
             this.$store.commit('setExamInfo', examInfo)
           }

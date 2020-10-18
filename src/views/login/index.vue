@@ -1,7 +1,7 @@
 <template>
   <div class="login-box">
     <div class="login-bg">
-      <div class="app-title">2020成都市导游人员提升培训系统</div>
+      <div class="app-title">2020年成德眉资导游人员线上培训系统</div>
       <div class="login-title">
         <div class="login-title-line"></div>
         <div class="login-title-text">登 · 录</div>
@@ -43,26 +43,26 @@
       <div class="regist" @click="$router.push('/regist')">激活账号</div>
 
       <div class="note" v-if="showNote">
-        <h2>成都市文化广电旅游局关于开展2020年度成德眉资导游人员培训（网络）工作的通知</h2>
+        <h2>成都市文化广电旅游局关于开展2020年度成德眉资导游人员线上培训工作的通知</h2>
         <section>
           各位导游：<br>
-          <p style="text-indent: 20px;">欢迎参加2020年度成德眉资导游人员在线培训，现将注意事项做如下通知。</p>
+          <p style="text-indent: 20px;">欢迎参加2020年度成德眉资导游人员线上培训，现将注意事项做如下通知。</p>
         </section>
         <br />
         <section>
-          一、培训日期
-2020年10月19日至2020年12月20日（共计60天）
+          一、培训日期 2020年10月19日至2020年12月20日（共计60天）
         </section>
         <br />
         <section>
-          二、培训方式
-导游学员进入网站后，先点击激活账户，用个人身份证号进行账号激活，并设置密码。激活成功后方可登录系统进行学习，本次培训要求各学员需在线培训24学时。学员可在“我的”功能内查询学习进度，显示“已通过”表示本次培训完成。
+          二、培训方式 导游学员进入网站后，先点击激活账户，用个人身份证号进行账号激活，并设置密码。激活成功后方可登录系统进行学习，本次培训要求各学员需在线培训24学时。学员可在“我的”功能内查询学习进度，显示“已通过”表示本次培训完成。
         </section>
         <br />
         <section>
-          三、培训咨询服务
-本次培训采用线上模式，参与培训期间如在实际操作中有任何疑问和问题，请通过以下方式进行咨询：
-QQ群号：571944516
+          三、培训咨询服务 本次培训采用线上模式，参与培训期间如在实际操作中有任何疑问和问题，请通过以下方式进行咨询： QQ群号：571944516
+        </section>
+        <br>
+        <section>
+          温馨提示：强制挂机系统会暂停学时记录!
         </section>
         <!-- <br /> -->
         <!-- <p style="float: right;">2020年10月30日</p> -->
@@ -74,7 +74,7 @@ QQ群号：571944516
 
 <script>
 import { login } from 'api/login';
-import { setTokenLoc, setUserInfo, setCardNo } from 'utils/storage';
+import { setTokenLoc, setCardNo } from 'utils/storage';
 
 export default {
   name: "login",

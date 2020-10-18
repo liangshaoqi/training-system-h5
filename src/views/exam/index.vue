@@ -1,9 +1,7 @@
 <template>
   <div class="exam-box">
-    <div class="exam_note">
-      <h2>注意事项：</h2>
-      1.本试卷共45题，其中单选20题/2分，多选10题/3分，判断15题/2分，合计100分；<br>
-      2.导游员在规定时间内完成网上课件学习并完成测试试题，测试成绩达80分即通过2020年度导游培训。在线考试若未达80分，导游需要再次参与考试，直至通过；
+    <div class="exam-note">
+      本测试不做为考核通过要求。
     </div>
 
     <div class="choice">
@@ -156,10 +154,10 @@ export default {
   .exam-box {
     padding: .15rem;
     font-size: .15rem;
-    .exam_note {
-      line-height: .22rem;
-      padding-bottom: .2rem;
-      border-bottom: 1px solid #ccc;
+    .exam-note {
+      margin-bottom: 20px;
+      line-height: 24px;
+      font-size: 18px;
     }
     .choice {
       font-size: .16rem;
