@@ -49,7 +49,6 @@ export default {
       this.timeout = setTimeout(() => {
         saveExamInfo({
           cardNo: localStorage.getItem('cardNo'),
-          startTime: new Date(startTime),
           endTime: new Date(startTime + this.minute * 60 * 1000),
           workingTime: this.minute
         }).then(res => {
