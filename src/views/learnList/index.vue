@@ -8,12 +8,12 @@
 
     <div class="list-container">
       <template v-for="(item, idx) in list">
-        <div class="learn-item" v-if="item.type === 'MP4'" :key="idx" @click="toLearnDetails(item.url)">
+        <div class="learn-item" v-if="item.type === 'MP4'" :key="idx" @click="toLearnDetails(item.url, 'MP4')">
           <h3 class="title">{{item.level3}}</h3>
           <div class="to-learn"><span>去学习&gt;&gt;</span></div>
         </div>
 
-        <div class="learn-pdf" v-else :key="idx" @click="toPDF(item.url)">
+        <div class="learn-pdf" v-else :key="idx" @click="toLearnDetails(item.img, 'PDF')">
           <mt-cell :title="item.level3" is-link></mt-cell>
         </div>
       </template>
@@ -40,11 +40,8 @@ export default {
     this.list = info.infos || []
   },
   methods: {
-    toLearnDetails (url) {
-      this.$router.push(`/learnDetails?url=${url}`)
-    },
-    toPDF (url) {
-      window.open(url)
+    toLearnDetails (url, type) {
+      this.$router.push(`/learnDetails?url=${url}&type=${type}`)
     }
   }
 };

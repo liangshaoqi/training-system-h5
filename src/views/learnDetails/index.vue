@@ -7,6 +7,7 @@
     </mt-header>
 
     <iframe
+      v-if="type === 'MP4'"
       :src="url"
       scrolling="no"
       border="0"
@@ -17,16 +18,29 @@
       height="100%"
     >
     </iframe>
+    <div v-if="type === 'PDF'">
+      <img :src="url" style="width: 100%" alt="">
+    </div>
   </div>
 </template>
 
 <script>
+import { Toast } from 'mint-ui';
+
 export default {
   name: 'learn-details',
   data () {
     return {
-      url: this.$route.query ? this.$route.query.url : ''
+      url: '',
+      type: '',
+      numPages:1,
     }
+  },
+  mounted () {
+    const { url, type } = this.$route.query
+
+    this.type = type
+    this.url = url
   }
 }
 </script>
