@@ -11,7 +11,7 @@ export default {
   name: 'App',
   data () {
     return {
-      minute: 1,
+      minute: process.env.NODE_ENV === 'production' ? 5 : 1,
       timeout: null,
     }
   },
@@ -46,10 +46,14 @@ export default {
         return
       }
       localStorage.setItem('startTime', startTime)
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+        this.timeout = null
+      }
       this.timeout = setTimeout(() => {
         saveExamInfo({
           cardNo: localStorage.getItem('cardNo'),
-          endTime: new Date(startTime + this.minute * 60 * 1000),
+          endTime: parseInt(startTime) + this.minute * 60 * 1000,
           workingTime: this.minute
         }).then(res => {
           if (res.code === '200') {
