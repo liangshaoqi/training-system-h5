@@ -11,7 +11,7 @@ export default {
   name: 'App',
   data () {
     return {
-      minute: process.env.NODE_ENV === 'production' ? 5 : 1,
+      minute: process.env.NODE_ENV === 'production' ? 1 : 1,
       timeout: null,
     }
   },
