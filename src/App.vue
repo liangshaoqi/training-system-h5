@@ -11,7 +11,7 @@ export default {
   name: 'App',
   data () {
     return {
-      minute: process.env.NODE_ENV === 'production' ? 5 : 1,
+      minute: process.env.NODE_ENV === 'production' ? 1 : 1,
       timeout: null,
     }
   },
@@ -38,9 +38,15 @@ export default {
   methods: {
     saveExamTime () {
       const startTime = localStorage.getItem('startTime') ? localStorage.getItem('startTime') : +new Date()
-      const second = localStorage.getItem('startTime') ? this.minute * 60 - (+new Date() - startTime) / 1000 : this.minute * 60
+      let offlineSecond = parseInt(localStorage.getItem('offlineSecond') || 0)
+      let second = localStorage.getItem('startTime') ? this.minute * 60 - (+new Date() - startTime) / 1000 : this.minute * 60
 
-      if (second <= 0) {
+      if (offlineSecond) {
+        second = this.minute * 60
+        offlineSecond = offlineSecond + second
+      }
+
+      if (!offlineSecond && second <= 0) {
         localStorage.setItem('startTime', +new Date())
         this.saveExamTime()
         return
@@ -51,19 +57,27 @@ export default {
         this.timeout = null
       }
       this.timeout = setTimeout(() => {
+        const workingTime = offlineSecond ? Math.floor(offlineSecond / 60 * 100) / 100 : this.minute
+
         saveExamInfo({
           cardNo: localStorage.getItem('cardNo'),
-          endTime: parseInt(startTime) + this.minute * 60 * 1000,
-          workingTime: this.minute
+          endTime: +new Date(),
+          workingTime,
         }).then(res => {
           if (res.code === '200') {
             const examInfo = this.$store.state.examInfo || {}
-            examInfo.workingTime = examInfo.workingTime + this.minute
+            examInfo.workingTime = examInfo.workingTime + workingTime
             examInfo.status = res.data
 
             this.$store.commit('setExamInfo', examInfo)
+            localStorage.removeItem('offlineSecond')
           }
           localStorage.setItem('startTime', +new Date())
+          this.saveExamTime()
+        }).catch(() => {
+          clearTimeout(this.timeout)
+          this.timeout = null
+          localStorage.setItem('offlineSecond', offlineSecond || this.minute * 60)
           this.saveExamTime()
         })
       }, second * 1000)

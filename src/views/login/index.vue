@@ -75,7 +75,7 @@
 <script>
 import { login } from 'api/login';
 import { setTokenLoc, setCardNo } from 'utils/storage';
-
+import { Toast } from 'mint-ui';
 export default {
   name: "login",
   data() {
@@ -87,19 +87,23 @@ export default {
   },
   methods: {
     Login () {
-      login({
-        cardNo: this.cardNo,
-        password: this.password
-      }).then(async res => {
-        const { code, data = {} } = res;
+      Toast({
+        message: '培训已结束'
+      });
+      return
+      // login({
+      //   cardNo: this.cardNo,
+      //   password: this.password
+      // }).then(async res => {
+      //   const { code, data = {} } = res;
 
-        if (code === '200') {
-          await setTokenLoc(data.token || '');
-          await setCardNo(data.cardNo || '');
-          this.$store.commit('setUserInfo', data)
-          this.$router.push('/my');
-        }
-      })
+      //   if (code === '200') {
+      //     await setTokenLoc(data.token || '');
+      //     await setCardNo(data.cardNo || '');
+      //     this.$store.commit('setUserInfo', data)
+      //     this.$router.push('/my');
+      //   }
+      // })
     },
     closeNote () {
       this.showNote = false
