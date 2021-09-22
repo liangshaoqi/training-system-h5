@@ -1,46 +1,42 @@
 <template>
   <div class="login-box">
     <div class="login-bg">
-      <div class="app-title">2020年成德眉资导游人员线上培训系统</div>
-      <div class="login-title">
-        <div class="login-title-line"></div>
-        <div class="login-title-text">登 · 录</div>
-        <div class="login-title-line"></div>
-      </div>
+      <div class="form-box">
+        <div class="app-title">2021年度成都导游人员<br/>培训服务平台</div>
 
-      <div class="login-form">
-        <mt-field
-          label=""
-          placeholder="请输入已激活的身份证号"
-          type="tel"
-          v-model="cardNo"
-          style="margin-bottom: .5rem"
-        >
-          <img
-            class="form-icon"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
-            height="26px"
-            width="17px"
-          />
-        </mt-field>
-        <mt-field
-          label=""
-          placeholder="请输入密码"
-          type="password"
-          v-model="password"
-          :attr="{ maxlength: 20 }"
-        >
-          <img
-            class="form-icon"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAACYUlEQVRIS+WVW4iNcRTFf0sh5RKSN5I3jZJLUqNBKCEeMEkTiYYXxcMkhckDj6gpmidjQogapKaQXJPLRC4lvCjklpJbYWmf/mc633Euzrza9T19e6+993/vvZaoYraHAruBecBGSZeqxaicg+1BwHpgGzAa+AX0A7qAVkn3y8VmQG1H0BRgObAGGAW8BLYCV4E9wEog4qLiw8B5Se8LE8j2vhQ8BpgIDEsOT4C9QKek7/kg2+GzJYEPBH4Dz4CnwLtIFKAG4otsj4DrwFlJtyq9ne3hwBJgbupuHBBJduZBL0qKn3022zOBK/8BqO2RaVhtkl7HmxW031rzm9oeDFwApgPNktoTaH1au9pAbQ8AzqXrugbMl/Ttn0Ftjwf2A9sl9aTDOAasAOKaZkn6VLC/1Su1vTBV9RaIddkMbACeA/WS3hTun+0M6M/YL0lzipfUdlS6CfgMDAFiKAH4ooRvA3AZ2BGDegX8kBQXkTHbceOdwCogWm2Q9KDUhdheDRyKbgL0JLAMmCrpbgng/kAL0C3pTgVWOwMsBuoCNP92XZKW9uVObU8GbgP3JE3LUZ/tG8AMoFHSiVqAbQeJ3AQmAQskdedBJ6RMQWOzK7VZNPGIP5JosENScHCObHNmuxE4migwlrossyf/IPS2kJhUUOzt1wxoclwHHAS+AGslnSoz6RFAB7AI6IkLk/Qh7/uXRtmOCYZMhAKcTnr0MCUN3WoCdiXdCr1qkhR73Gslhc/2WOBAPHxShZCLqKQOCEL5mASxXVKoRsbKqmmqLK6kGYhri8ofA8eBAOu9+2LQPy42I8OXgLxuAAAAAElFTkSuQmCC"
-            height="24px"
-            width="21px"
-          />
-        </mt-field>
+        <div class="login-form">
+          <mt-field
+            label=""
+            placeholder="请输入已激活的身份证号"
+            type="tel"
+            v-model="cardNo"
+          >
+            <img
+              class="form-icon"
+              :src="mobileIcon"
+              height="17px"
+              width="12px"
+            />
+          </mt-field>
+          <mt-field
+            label=""
+            placeholder="请输入密码"
+            type="password"
+            v-model="password"
+            :attr="{ maxlength: 20 }"
+          >
+            <img
+              class="form-icon"
+              :src="passwordIcon"
+              height="13px"
+              width="13px"
+            />
+          </mt-field>
+        </div>
       </div>
 
       <mt-button type="primary" class="loginBtn" @click="Login">登录</mt-button>
-      <div class="regist" @click="$router.push('/regist')">激活账号</div>
+      <div class="regist" @click="$router.push('/regist')">没有账号？点击前往激活</div>
 
       <div class="note" v-if="showNote">
         <h2>成都市文化广电旅游局关于开展2020年度成德眉资导游人员线上培训工作的通知</h2>
@@ -76,13 +72,17 @@
 import { login } from 'api/login';
 import { setTokenLoc, setCardNo } from 'utils/storage';
 import { Toast } from 'mint-ui';
+import passwordIcon from '../../assets/login/password.png';
+import mobileIcon from '../../assets/login/mobile.png';
 export default {
   name: "login",
   data() {
     return {
       cardNo: localStorage.getItem('cardNo') || '',
       password: '',
-      showNote: true,
+      showNote: false,
+      passwordIcon,
+      mobileIcon,
     };
   },
   methods: {
@@ -125,7 +125,19 @@ export default {
     width: 100%;
     min-height: 100%;
     background: rgba($color: #000000, $alpha: .3);
-    padding: .5rem 12vw 0;
+    padding-top: 2.3rem;
+    .form-box {
+      width: 3.26rem;
+      background: #fff;
+      border-radius: 8px;
+      margin: 0 auto;
+      padding: .2rem 0;
+      .app-title {
+        font-size: .18rem;
+        line-height: .3rem;
+        color: #187EB2;
+      }
+    }
   }
   .app-title {
     font-size: .26rem;
@@ -151,25 +163,31 @@ export default {
   }
 
   .login-form {
+    padding: 0 .25rem;
     // 重置表单样式
     .mint-cell {
       background: transparent;
       position: relative;
-    }
-    .mint-cell-wrapper {
-      background: transparent;
-      border-bottom: 1px solid rgba(233, 233, 233, 0.5);
-      input {
+      &:nth-child(1) {
+        .mint-cell-wrapper {
+          border-bottom: 1px solid rgba(233, 233, 233, 0.5);
+        }
+      }
+      .mint-cell-wrapper {
         background: transparent;
-        color: #e9e9e9;
-        font-size: 0.18rem;
-        padding-left: 0.3rem;
-        &::placeholder {
-          color: #e9e9e9;
-          font-size: 0.18rem;
+        input {
+          background: transparent;
+          color: #303030;
+          font-size: 0.13rem;
+          padding-left: 0.3rem;
+          &::placeholder {
+            color: #C1C1C1;
+            font-size: 0.13rem;
+          }
         }
       }
     }
+    
     .mint-field-other {
       position: inherit;
     }
@@ -182,16 +200,20 @@ export default {
   }
 
   .loginBtn {
-    width: 100%;
-    margin-top: .4rem;
+    width: 3.26rem;
+    height: .44rem;
+    background: linear-gradient(87deg, #2078E4 0%, #1A5AC1 100%);
+    box-shadow: 0px 2px 7px 0px rgba(7, 140, 209, 0.47);
+    border-radius: .22rem;
+    margin: .58rem .25rem 0;
   }
 
   .forgetPwd,
   .regist {
-    text-align: right;
+    text-align: center;
     font-size: 0.14rem;
-    color: #fff;
-    margin: 0.2rem 0;
+    color: #078CD1;
+    margin: 0.26rem 0;
   }
 
   .note {
