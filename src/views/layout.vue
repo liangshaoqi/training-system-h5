@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Head ref="head"></Head>
+    <!-- <Head ref="head"></Head> -->
     <div class="container-view">
       <router-view></router-view>
     </div>
@@ -22,7 +22,9 @@ export default {
 
 <style lang='scss'>
   .container-view {
-    padding-top: .4rem;
+    min-height: 100vh;
+    // padding-top: .4rem;
     padding-bottom: .6rem;
+    background: #fff;
   }
 </style>

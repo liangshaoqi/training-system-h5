@@ -5,12 +5,12 @@
         <span>{{info.name}}</span>
       </div>
       <div class="info">
-        <div>电子导游证：{{info.cardNo}}</div>
-        <div>已在线学习时长： {{getTime(info.workingTime)}}</div>
-        <div>还需学习时长： {{getTime(24 * 60 - info.workingTime)}}</div>
-        <div>培训状态：{{info.status}}</div>
+        <div><span>电子导游证</span>{{info.cardNo}}</div>
+        <div><span>已学习时长</span>{{getTime(info.workingTime)}}</div>
+        <div><span>还需学习时长</span>{{getTime(24 * 60 - info.workingTime)}}</div>
+        <div><span>培训状态</span>{{info.status}}</div>
       </div>
-      <mt-button type="primary" style="width: 60vw" @click="logOutFunc">退出当前账号</mt-button>
+      <mt-button class="log-out" type="primary" @click="logOutFunc">退出当前账号</mt-button>
     </div>
   </div>
 </template>
@@ -73,25 +73,41 @@ export default {
 </script>
 <style lang='scss'>
   .my-box {
-    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    background: url("../../assets/login/loginBg.png");
+    background-size: cover;
+    background-position: top;
+    content: "viewport-units-buggyfill; min-height: 100vh";
+    padding-top: 3rem;
     > div {
       display: flex;
       flex-flow: column;
       align-items: center;
       > .name {
-        width: 1rem;
-        height: 1rem;
-        background: #0d97e6;
-        color: #fff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-size: .24rem;
+        font-weight: bold;
+        color: #303030;
+        text-align: center;
       }
       > .info {
-        font-size: .15rem;
-        line-height: .25rem;
-        margin: .4rem .2rem .5rem;
+        font-size: .13rem;
+        color: #303030;
+        line-height: .3rem;
+        margin: .3rem .2rem .4rem;
+        span {
+          display: inline-block;
+          width: 1rem;
+          font-weight: bold;
+        }
+      }
+      > .log-out {
+        width: 3.26rem;
+        height: .44rem;
+        background: linear-gradient(87deg, #2078E4 0%, #1A5AC1 100%);
+        box-shadow: 0px 2px 7px 0px rgba(7, 140, 209, 0.47);
+        border-radius: .22rem;
+        font-size: .18rem;
       }
     }
   }
