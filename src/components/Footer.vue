@@ -45,6 +45,7 @@ export default {
     width: 100%;
     box-shadow: 0px 0px 1px 0px #E6E6E6;
     background-color: #fff;
+    background-image: none;
     .mint-tab-item {
       color: #5D5D5D;
       &.is-selected {

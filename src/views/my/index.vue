@@ -2,7 +2,7 @@
   <div class="my-box">
     <div>
       <div class="name">
-        <span>{{info.name}}</span>
+        <span>{{info.name}}123123</span>
       </div>
       <div class="info">
         <div><span>电子导游证</span>{{info.cardNo}}</div>
@@ -108,6 +108,7 @@ export default {
         box-shadow: 0px 2px 7px 0px rgba(7, 140, 209, 0.47);
         border-radius: .22rem;
         font-size: .18rem;
+        margin-bottom: .5rem;
       }
     }
   }

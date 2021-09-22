@@ -9,9 +9,9 @@
       >
         <img
           class="form-icon"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
-          height="26px"
-          width="17px"
+          :src="mobileIcon"
+          height="17px"
+          width="12px"
         />
         <div class="verify-btn" @click="getInfo">查验</div>
       </mt-field>
@@ -32,9 +32,9 @@
       >
         <img
           class="form-icon"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
-          height="26px"
-          width="17px"
+          :src="passwordIcon"
+          height="13px"
+          width="13px"
         />
         <img
           class="show-pwd-icon"
@@ -52,9 +52,9 @@
       >
         <img
           class="form-icon"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
-          height="26px"
-          width="17px"
+          :src="passwordIcon"
+          height="13px"
+          width="13px"
         />
         <img
           class="show-pwd-icon"
@@ -75,6 +75,8 @@
 import { isIDCard } from 'utils';
 import { Toast } from 'mint-ui';
 import { getGuiderInfo, register } from 'api/regist';
+import passwordIcon from '../../assets/login/password.png';
+import mobileIcon from '../../assets/login/mobile.png';
 import ShowPwdIcon from '../../assets/login/showPwd.png';
 import HiddenPwdIcon from '../../assets/login/hiddenPwd.png';
 
@@ -93,6 +95,8 @@ export default {
       showPwd2: false,
       ShowPwdIcon,
       HiddenPwdIcon,
+      passwordIcon,
+      mobileIcon,
     }
   },
   methods: {
@@ -248,7 +252,7 @@ export default {
           color: #303030;
           font-size: 0.13rem;
           padding-left: .2rem;
-          margin-left: .2rem;
+          margin-left: .3rem;
           border-left: 1px solid rgba($color: #000000, $alpha: .22);
           &::placeholder {
             color: #C1C1C1;

@@ -21,7 +21,7 @@
           <mt-field
             label=""
             placeholder="请输入密码"
-            type="password"
+            :type="!showPwd ? 'password' : 'text'"
             v-model="password"
             :attr="{ maxlength: 20 }"
           >
@@ -31,6 +31,11 @@
               height="13px"
               width="13px"
             />
+            <img
+              class="show-pwd-icon"
+              :src="!showPwd ? ShowPwdIcon : HiddenPwdIcon"
+              @click="() => this.showPwd = !this.showPwd"
+            >
           </mt-field>
         </div>
       </div>
@@ -74,6 +79,9 @@ import { setTokenLoc, setCardNo } from 'utils/storage';
 import { Toast } from 'mint-ui';
 import passwordIcon from '../../assets/login/password.png';
 import mobileIcon from '../../assets/login/mobile.png';
+import ShowPwdIcon from '../../assets/login/showPwd.png';
+import HiddenPwdIcon from '../../assets/login/hiddenPwd.png';
+
 export default {
   name: "login",
   data() {
@@ -83,6 +91,9 @@ export default {
       showNote: false,
       passwordIcon,
       mobileIcon,
+      showPwd: false,
+      ShowPwdIcon,
+      HiddenPwdIcon,
     };
   },
   methods: {
@@ -125,7 +136,6 @@ export default {
   .login-bg {
     width: 100%;
     min-height: 100%;
-    background: rgba($color: #000000, $alpha: .3);
     padding-top: 2.3rem;
     .form-box {
       width: 3.26rem;
@@ -137,6 +147,7 @@ export default {
         font-size: .18rem;
         line-height: .3rem;
         color: #187EB2;
+        margin-bottom: .1rem;
       }
     }
   }
@@ -170,9 +181,19 @@ export default {
       background: transparent;
       position: relative;
       &:nth-child(1) {
+        .mint-field-clear {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          margin-right: 0;
+        }
         .mint-cell-wrapper {
           border-bottom: 1px solid rgba(233, 233, 233, 0.5);
         }
+      }
+      .mint-field-clear {
+        margin-right: .2rem;
       }
       .mint-cell-wrapper {
         background: transparent;
@@ -231,6 +252,15 @@ export default {
       text-align: center;
       line-height: .3rem;
     }
+  }
+
+  .show-pwd-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: .17rem;
+    height: .12rem;
   }
 }
 </style>
