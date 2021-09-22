@@ -1,16 +1,16 @@
 <template>
   <div class="footer-box">
     <mt-tabbar fixed v-model="selected">
+      <mt-tab-item id="/exam">
+        <img slot="icon" class="exam-icon" :src="selected === '/exam' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
+        考试
+      </mt-tab-item>
       <mt-tab-item id="/learn">
-        <img slot="icon" :src="selected === '/learn' ? require('../assets/tabbar/learn-active.png') : require('../assets/tabbar/learn.png')" alt="">
+        <img slot="icon" class="learn-icon" :src="selected === '/learn' ? require('../assets/tabbar/learn-active.png') : require('../assets/tabbar/learn.png')" alt="">
         学习
       </mt-tab-item>
-      <mt-tab-item id="/exam">
-        <img slot="icon" :src="selected === '/exam' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
-        测试
-      </mt-tab-item>
       <mt-tab-item id="/my">
-        <img slot="icon" :src="selected === '/my' ? require('../assets/tabbar/my-active.png') : require('../assets/tabbar/my.png')" alt="">
+        <img slot="icon" class="my-icon" :src="selected === '/my' ? require('../assets/tabbar/my-active.png') : require('../assets/tabbar/my.png')" alt="">
         我的
       </mt-tab-item>
     </mt-tabbar>
@@ -42,6 +42,38 @@ export default {
 </script>
 <style lang='scss'>
   .footer-box .mint-tabbar {
-    border-top: 1px solid #e6e6e6;
+    width: 100%;
+    box-shadow: 0px 0px 1px 0px #E6E6E6;
+    background-color: #fff;
+    .mint-tab-item {
+      color: #5D5D5D;
+      &.is-selected {
+        color: #1C61C9;
+        background-color: #fff;
+      }
+      .learn-icon {
+        position: absolute;
+        width: .64rem;
+        height: .64rem;
+        top: -.33rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .mint-tab-item-icon {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .my-icon {
+        width: .15rem;
+        height: .18rem;
+      }
+      .exam-icon {
+        width: .18rem;
+        height: .18rem;
+      }
+    }
   }
 </style>

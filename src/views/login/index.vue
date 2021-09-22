@@ -87,23 +87,24 @@ export default {
   },
   methods: {
     Login () {
-      Toast({
-        message: '培训已结束'
-      });
+      // Toast({
+      //   message: '培训已结束'
+      // });
+      this.$router.push('/my');
       return
-      // login({
-      //   cardNo: this.cardNo,
-      //   password: this.password
-      // }).then(async res => {
-      //   const { code, data = {} } = res;
+      login({
+        cardNo: this.cardNo,
+        password: this.password
+      }).then(async res => {
+        const { code, data = {} } = res;
 
-      //   if (code === '200') {
-      //     await setTokenLoc(data.token || '');
-      //     await setCardNo(data.cardNo || '');
-      //     this.$store.commit('setUserInfo', data)
-      //     this.$router.push('/my');
-      //   }
-      // })
+        if (code === '200') {
+          await setTokenLoc(data.token || '');
+          await setCardNo(data.cardNo || '');
+          this.$store.commit('setUserInfo', data)
+          this.$router.push('/my');
+        }
+      })
     },
     closeNote () {
       this.showNote = false

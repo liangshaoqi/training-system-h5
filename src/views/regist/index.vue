@@ -1,23 +1,73 @@
 <template>
   <div class="regist-box">
-    <mt-header fixed title="账号激活">
-      <router-link to="" slot="left">
-        <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-      </router-link>
-    </mt-header>
-
-    <div class="regist-form">
-      <mt-field label="身份证号" placeholder="请输入身份证号/登录账号" type="IDCard" v-model="IDCard">
-        <div class="getInfo" @click="getInfo">确定</div>
+    <div class="ID-form common-form-box">
+      <mt-field
+        label=""
+        placeholder="请输入身份证号"
+        type="IDCard"
+        v-model="IDCard"
+      >
+        <img
+          class="form-icon"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
+          height="26px"
+          width="17px"
+        />
+        <div class="verify-btn" @click="getInfo">查验</div>
       </mt-field>
-      <mt-field label="姓名" placeholder="点击确定后自动获取" disabled v-model="name"></mt-field>
-      <mt-field label="电子导游证" placeholder="点击确定后自动获取" disabled v-model="guideID"></mt-field>
-      <mt-field label="挂靠单位" placeholder="点击确定后自动获取" disabled v-model="company"></mt-field>
-      <mt-field label="设置密码" placeholder="6-12位字符" type="password" v-model="password"></mt-field>
-      <mt-field label="确认密码" placeholder="6-12位字符" type="password" v-model="passwordConfirm"></mt-field>
-
-      <mt-button type="primary" style="width: 100%; margin-top: .2rem" @click="submitForm">完成</mt-button>
     </div>
+    <div class="regist-form common-form-box">
+      <div class="common-form-title">导游信息 <span>点击查验自动获取</span></div>
+      <div class="info-item"><span>姓名</span>{{name || ''}}</div>
+      <div class="info-item"><span>电子导游证</span>{{guideID || ''}}</div>
+      <div class="info-item"><span>挂靠单位</span>{{company || ''}}</div>
+    </div>
+    <div class="password-form common-form-box">
+      <div class="common-form-title">设置密码</div>
+      <mt-field
+        label=""
+        placeholder="请输入密码（6-12位字符）"
+        :type="!showPwd1 ? 'password' : 'text'"
+        v-model="password"
+      >
+        <img
+          class="form-icon"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
+          height="26px"
+          width="17px"
+        />
+        <img
+          class="show-pwd-icon"
+          :src="!showPwd1 ? ShowPwdIcon : HiddenPwdIcon"
+          height=".17rem"
+          width=".12rem"
+          @click="() => this.showPwd1 = !this.showPwd1"
+        >
+      </mt-field>
+      <mt-field
+        label=""
+        placeholder="请确认密码（6-12位字符）"
+        :type="!showPwd2 ? 'password' : 'text'"
+        v-model="passwordConfirm"
+      >
+        <img
+          class="form-icon"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAaCAYAAABRqrc5AAAAu0lEQVRIS+2VPQpCMRCEv9XWIwh6EwsLe8HWysojiOBf5xUsPIDnsRax0drGRkc2vIeg5kEsrLIQSLH7sQzJjEnqAFugDRhpdQbGJukA1AvQI4FRA4ZAwyE+uDKzWQIgtEqaAnOHKFzMFj9AJsAyQ17KScqavD2krMnnz8qa/EmTHeAntfrAoHS22PANuACtCvq9NOpYVLjvroEr4O7+rQLkBDQjDZ4re6BbscnRIT1gU4BSwstTwhcYPQEdONbWFRejRgAAAABJRU5ErkJggg=="
+          height="26px"
+          width="17px"
+        />
+        <img
+          class="show-pwd-icon"
+          :src="!showPwd2 ? ShowPwdIcon : HiddenPwdIcon"
+          height=".17rem"
+          width=".12rem"
+          @click="() => this.showPwd2 = !this.showPwd2"
+        >
+      </mt-field>
+    </div>
+
+    <mt-button type="primary" class="confirm-btn" @click="submitForm">确认激活</mt-button>
+    <div class="to-login" @click="toLogin">已有账号 前往登陆</div>
   </div>
 </template>
 
@@ -25,6 +75,8 @@
 import { isIDCard } from 'utils';
 import { Toast } from 'mint-ui';
 import { getGuiderInfo, register } from 'api/regist';
+import ShowPwdIcon from '../../assets/login/showPwd.png';
+import HiddenPwdIcon from '../../assets/login/hiddenPwd.png';
 
 export default {
   components: {
@@ -37,6 +89,10 @@ export default {
       company: '',
       password: '',
       passwordConfirm: '',
+      showPwd1: false,
+      showPwd2: false,
+      ShowPwdIcon,
+      HiddenPwdIcon,
     }
   },
   methods: {
@@ -82,21 +138,178 @@ export default {
           this.$router.replace('/regist-success')
         }
       })
+    },
+    toLogin () {
+      this.$router.push('/login')
     }
   }
 }
 </script>
 <style lang='scss'>
   .regist-box {
-    padding-top: .5rem;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: url("../../assets/login/loginBg.png");
+    background-size: cover;
+    background-position: top;
+    content: "viewport-units-buggyfill; min-height: 100vh";
+    padding: .5rem .24rem .5rem;
+    box-sizing: border-box;
+    .common-form-box {
+      background: #FFFFFF;
+      border-radius: 8px;
+      box-shadow: 0 0 .1rem 0 #dcf7ff;
+    }
+    .ID-form {
+      width: 100%;
+      padding: .25rem;
+      margin-bottom: .15rem;
+      position: relative;
+      .mint-cell {
+        min-height: inherit;
+      }
+      .mint-cell-wrapper {
+        background: transparent;
+        border-bottom: 1px solid #fff;
+        input {
+          height: .19rem;
+          line-height: .19rem;
+          background: transparent;
+          color: #303030;
+          font-size: 0.13rem;
+          padding-left: .2rem;
+          margin-left: .2rem;
+          border-left: 1px solid rgba($color: #000000, $alpha: .22);
+          &::placeholder {
+            color: #C1C1C1;
+            font-size: 0.13rem;
+          }
+        }
+      }
+      .mint-field-clear {
+        margin-right: .25rem;
+        .mintui {
+          width: .16rem;
+          height: .16rem;
+          font-size: .16rem;
+        }
+      }
+      .mint-field-other {
+        position: inherit;
+      }
+      .verify-btn {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: .13rem;
+        line-height: .19rem;
+        color: #1C64CC;
+        font-weight: bold;
+      }
+    }
     .regist-form {
-      padding: 0 .1rem;
-      .getInfo {
-        color: #0d97e6;
+      padding: .2rem;
+      margin-bottom: .15rem;
+      .common-form-title {
+        margin-bottom: .27rem;
       }
-      input:disabled {
-        background: #fff;
+      .info-item {
+        font-size: .13rem;
+        color: #303030;
+        margin: .2rem .3rem 0;
+        span {
+          display: inline-block;
+          width: .9rem;
+          font-weight: bold;
+        }
       }
+    }
+    .password-form {
+      padding: .2rem .2rem .1rem;
+      .mint-cell {
+        min-height: inherit;
+        &:nth-child(2) {
+          .mint-cell-wrapper {
+            border-bottom: 1px solid #f2f2f2;
+          }
+        }
+      }
+      .mint-cell-wrapper {
+        padding: .2rem 0;
+        background: transparent;
+        border-bottom: 1px solid #fff;
+        input {
+          height: .19rem;
+          line-height: .19rem;
+          background: transparent;
+          color: #303030;
+          font-size: 0.13rem;
+          padding-left: .2rem;
+          margin-left: .2rem;
+          border-left: 1px solid rgba($color: #000000, $alpha: .22);
+          &::placeholder {
+            color: #C1C1C1;
+            font-size: 0.13rem;
+          }
+        }
+      }
+      .mint-field-clear {
+        margin-right: .3rem;
+        .mintui {
+          width: .16rem;
+          height: .16rem;
+          font-size: .16rem;
+        }
+      }
+      .mint-field-other {
+        position: inherit;
+      }
+    }
+    .confirm-btn {
+      width: 100%;
+      height: .44rem;
+      background: linear-gradient(87deg, #2078E4 0%, #1A5AC1 100%);
+      box-shadow: 0px 2px 7px 0px rgba(7, 140, 209, 0.47);
+      border-radius: .22rem;
+      margin-top: .35rem;
+      font-size: .18rem;
+    }
+    .to-login {
+      font-size: .14rem;
+      color: #078CD1;
+      text-align: center;
+      margin-top: .2rem;
+    }
+
+
+    .common-form-title {
+      font-size: .14rem;
+      font-weight: bold;
+      color: #1E1E1E;
+      span {
+        display: inline-block;
+        font-size: .12rem;
+        font-weight: normal;
+        color: #C1C1C1;
+        margin-left: .07rem;
+      }
+    }
+    .form-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.05rem;
+      transform: translateY(-50%);
+    }
+    .show-pwd-icon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: .17rem;
+      height: .12rem;
     }
   }
 </style>
