@@ -76,7 +76,6 @@
 <script>
 import { login } from 'api/login';
 import { setTokenLoc, setCardNo } from 'utils/storage';
-import { Toast } from 'mint-ui';
 import passwordIcon from '../../assets/login/password.png';
 import mobileIcon from '../../assets/login/mobile.png';
 import ShowPwdIcon from '../../assets/login/showPwd.png';
@@ -143,6 +142,7 @@ export default {
       border-radius: 8px;
       margin: 0 auto;
       padding: .2rem 0;
+      box-shadow: 0 0 .1rem 0 #dcf7ff;
       .app-title {
         font-size: .18rem;
         line-height: .3rem;
@@ -222,12 +222,13 @@ export default {
   }
 
   .loginBtn {
-    width: 3.26rem;
+    width: 86%;
     height: .44rem;
     background: linear-gradient(87deg, #2078E4 0%, #1A5AC1 100%);
     box-shadow: 0px 2px 7px 0px rgba(7, 140, 209, 0.47);
     border-radius: .22rem;
-    margin: .58rem .25rem 0;
+    margin-top: .58rem;
+    margin-left: 7%;
   }
 
   .forgetPwd,
