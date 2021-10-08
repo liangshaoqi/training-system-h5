@@ -100,8 +100,6 @@ export default {
       // Toast({
       //   message: '培训已结束'
       // });
-      this.$router.push('/my');
-      return
       login({
         cardNo: this.cardNo,
         password: this.password
