@@ -1,35 +1,22 @@
 <template>
   <div class="learn-level-two-box">
     <div class="type-info">
-      <img :src="type1" />
+      <img :src="title === '基础篇' ? type1 : title === '创新篇' ? type3 : type2" />
       <div>
-        <div class="type-name">基础技能篇</div>
-        <div class="type-desc">川渝地区旅游文化、旅游政策法规、导游实务知识</div>
-        <div class="learn-number">5个专题 | 15个培训课程</div>
+        <div class="type-name">{{title}}</div>
+        <div class="type-desc">{{list[0] && list[0].levelSecond}}</div>
+        <div class="learn-number">{{list.length || 0}}个专题 | {{(list[0] && list[0].infos.length) || 0}}个培训材料</div>
       </div>
     </div>
     
     <div class="course-list">
       <div class="title">课程列表</div>
 
-      <div class="course-item">
+      <div class="course-item" v-for="(item, idx) in list" :key="idx" @click="toDetails(idx)">
         <img :src="learn" alt="">
         <div>
-          <div class="course-name">川渝地区旅游文化</div>
-          <div class="course-number">共5个培训资料</div>
-        </div>
-      </div>
-      <div class="course-item">
-        <img :src="learn" alt="">
-        <div>
-          <div class="course-name">川渝地区旅游文化</div>
-          <div class="course-number">共5个培训资料</div>
-        </div>
-      </div><div class="course-item">
-        <img :src="learn" alt="">
-        <div>
-          <div class="course-name">川渝地区旅游文化</div>
-          <div class="course-number">共5个培训资料</div>
+          <div class="course-name">{{item.levelSecond}}</div>
+          <div class="course-number">共{{item.infos.length || 0}}个培训资料</div>
         </div>
       </div>
     </div>
@@ -60,7 +47,7 @@ export default {
     const info = learnList[idx] || {}
 
     this.title = info.levelFirst
-    this.list = info.levelSecondInfo
+    this.list = info.levelSecondInfo || []
     this.pIdx = idx
   },
   methods: {

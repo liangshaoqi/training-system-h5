@@ -1,10 +1,10 @@
 <template>
   <div class="footer-box">
     <mt-tabbar fixed v-model="selected">
-      <mt-tab-item id="/exam">
+      <!-- <mt-tab-item id="/exam">
         <img slot="icon" class="exam-icon" :src="selected === '/exam' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
         考试
-      </mt-tab-item>
+      </mt-tab-item> -->
       <mt-tab-item id="/learn">
         <img slot="icon" class="learn-icon" :src="selected === '/learn' ? require('../assets/tabbar/learn-active.png') : require('../assets/tabbar/learn.png')" alt="">
         学习
@@ -57,7 +57,7 @@ export default {
         width: .64rem;
         height: .64rem;
         top: -.33rem;
-        left: 50%;
+        left: 25%;
         transform: translateX(-50%);
       }
       .mint-tab-item-icon {

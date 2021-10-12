@@ -1,10 +1,10 @@
 <template>
   <div class="learn-details-box">
-    <mt-header fixed title="2020年成德眉资导游人员线上培训系统">
+    <!-- <mt-header fixed title="2021年成德眉资导游人员线上培训系统">
       <router-link to="" slot="left">
         <mt-button icon="back" @click="$router.back(-1)"></mt-button>
       </router-link>
-    </mt-header>
+    </mt-header> -->
 
     <iframe
       v-if="type === 'MP4'"

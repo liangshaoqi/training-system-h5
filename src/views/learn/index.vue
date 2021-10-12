@@ -21,25 +21,11 @@
       <div class="course-type">
         <div class="title">课程分类</div>
 
-        <div class="type-item" @click="toLevelTwo">
-          <img :src="type1Icon" alt="">
+        <div class="type-item" v-for="(item, idx) in list" :key="idx" @click="toLevelTwo(idx)">
+          <img :src="item.levelFirst === '基础篇' ? type1Icon : item.levelFirst === '创新篇' ? type3Icon : type2Icon" alt="">
           <div>
-            <div class="type-name">基础技能篇</div>
-            <div class="type-desc">川渝地区旅游文化、旅游政策法规、导游实务知识</div>
-          </div>
-        </div>
-        <div class="type-item" @click="toLevelTwo">
-          <img :src="type2Icon" alt="">
-          <div>
-            <div class="type-name">技能提升篇</div>
-            <div class="type-desc">旅游安全及突发事件应急技巧、导游带团（经验、技巧）分享交流</div>
-          </div>
-        </div>
-        <div class="type-item" @click="toLevelTwo">
-          <img :src="type3Icon" alt="">
-          <div>
-            <div class="type-name">创新篇</div>
-            <div class="type-desc">导游职业规划、川渝两地金牌（大师）导游在线直播</div>
+            <div class="type-name">{{item.levelFirst}}</div>
+            <div class="type-desc">{{item.levelSecondInfo[0].levelSecond}}</div>
           </div>
         </div>
       </div>
@@ -58,7 +44,7 @@ import type3Icon from '../../assets/learn/type3.png';
 export default {
   data () {
     return {
-      list: [1,2,3],
+      list: [],
       Banner1,
       type1Icon,
       type2Icon,

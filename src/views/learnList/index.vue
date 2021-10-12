@@ -1,33 +1,46 @@
 <template>
   <div class="learn-list-box">
-    <mt-header fixed :title="title || '2020年成德眉资导游人员线上培训系统'">
-      <router-link to="" slot="left">
-        <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-      </router-link>
-    </mt-header>
+    <div class="type-info">
+      <img :src="learn" />
+      <div>
+        <div class="type-name">{{title}}</div>
+        <div class="learn-number">{{(list.length) || 0}}个培训材料</div>
+      </div>
+    </div>
 
     <div class="list-container">
+      <div class="title">培训材料列表</div>
+
       <template v-for="(item, idx) in list">
-        <div class="learn-item" v-if="item.type === 'MP4'" :key="idx" @click="toLearnDetails(item.url, 'MP4')">
+        <div class="course-item" :key="idx" @click="toLearnDetails(item.url, item.type === '1' ? 'MP4' : 'PDF')">
+          <div class="title">{{item.level3}}</div>
+        </div>
+      </template>
+
+      <!-- <template v-for="(item, idx) in list">
+        <div class="learn-item" v-if="item.type === '1'" :key="idx" @click="toLearnDetails(item.url, 'MP4')">
           <h3 class="title">{{item.level3}}</h3>
           <div class="to-learn"><span>去学习&gt;&gt;</span></div>
         </div>
 
-        <div class="learn-pdf" v-else :key="idx" @click="toLearnDetails(item.img, 'PDF')">
+        <div class="learn-pdf" v-else :key="idx" @click="toLearnDetails(item.url, 'PDF')">
           <mt-cell :title="item.level3" is-link></mt-cell>
         </div>
-      </template>
+      </template> -->
     </div>
   </div>
 </template>
 
 <script>
+import learn from '../../assets/learn/learn.png';
+
 export default {
   components: {},
   data() {
     return {
       list: [],
-      title: ''
+      title: '',
+      learn,
     };
   },
   mounted () {
@@ -48,8 +61,59 @@ export default {
 </script>
 <style lang='scss'>
 .learn-list-box {
-  padding: .6rem .2rem.2rem;
+  padding: .4rem .2rem .2rem;
+
+  .type-info {
+    display: flex;
+    align-items: center;
+    padding-left: .05rem;
+    > img {
+      width: auto;
+      height: 1.21rem;
+      border-radius: .12rem;
+      margin-right: .2rem;
+    }
+    > div {
+      flex: 1;
+      .type-name {
+        font-size: .16rem;
+        line-height: .2rem;
+        font-weight: bold;
+        color: #333333;
+        margin-bottom: .08rem;
+      }
+      .type-desc {
+        font-size: .12rem;
+        color: #CCCCCC;
+        line-height: .2rem;
+        margin-bottom: .11rem;
+      }
+      .learn-number {
+        font-size: .12rem;
+        color: #6F6C6C;
+      }
+    }
+  }
+
   .list-container {
+    >.title {
+      font-size: .16rem;
+      font-weight: bold;
+      line-height: .2rem;
+      color: #333333;
+      margin-top: .5rem;
+      margin-bottom: .09rem;
+    }
+    .course-item {
+      border-top: 1px solid rgb(240, 240, 240);
+      .title {
+        font-size: .14rem;
+        line-height: .26rem;
+        color: #333;
+        padding: .2rem 0;
+      }
+    }
+
     .learn-item {
       background: #fff;
       margin-bottom: .2rem;
@@ -67,14 +131,6 @@ export default {
       top: .05rem;
       right: .1rem;
       background: #68a568;
-    }
-    .title {
-      width: 100%;
-      font-size: .16rem;
-      height: .4rem;
-      line-height: .4rem;
-      margin: 0;
-      padding: 0 .1rem;
     }
     .to-learn {
       height: 1.5rem;
