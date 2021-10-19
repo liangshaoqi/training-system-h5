@@ -1,5 +1,5 @@
 <template>
-  <mt-header fixed title="2021年成德眉资导游人员线上培训系统"></mt-header>
+  <mt-header fixed title="2021年度成都导游人员培训服务平台"></mt-header>
 </template>
 
 <script>

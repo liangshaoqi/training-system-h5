@@ -6,7 +6,7 @@
         考试
       </mt-tab-item> -->
       <mt-tab-item id="/learn">
-        <img slot="icon" class="learn-icon" :src="selected === '/learn' ? require('../assets/tabbar/learn-active.png') : require('../assets/tabbar/learn.png')" alt="">
+        <img slot="icon" class="exam-icon" :src="selected === '/learn' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
         学习
       </mt-tab-item>
       <mt-tab-item id="/my">

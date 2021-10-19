@@ -1,14 +1,19 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <advertise />
   </div>
 </template>
 
 <script>
 import { saveExamInfo } from 'api/my'
+import advertise from './components/advertise.vue'
 
 export default {
   name: 'App',
+  components: {
+    advertise,
+  },
   data () {
     return {
       minute: process.env.NODE_ENV === 'production' ? 1 : 1,

@@ -139,7 +139,10 @@ export default {
       }).then(res => {
         if (res.code === '200') {
           localStorage.setItem('cardNo', this.IDCard)
-          this.$router.replace('/regist-success')
+          Toast('注册成功，请登录', 5);
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 2000);
         }
       })
     },

@@ -4,15 +4,15 @@
       <img :src="learn" />
       <div>
         <div class="type-name">{{title}}</div>
-        <div class="learn-number">{{(list.length) || 0}}个培训材料</div>
+        <div class="learn-number" v-if="title !== '重要通知'">{{(list.length) || 0}}个培训材料</div>
       </div>
     </div>
 
     <div class="list-container">
-      <div class="title">培训材料列表</div>
+      <div class="title" v-if="title !== '重要通知'">培训材料列表</div>
 
       <template v-for="(item, idx) in list">
-        <div class="course-item" :key="idx" @click="toLearnDetails(item.url, item.type === '1' ? 'MP4' : 'PDF')">
+        <div class="course-item" :key="idx" @click="toLearnDetails(item)">
           <div class="title">{{item.level3}}</div>
         </div>
       </template>
@@ -53,7 +53,9 @@ export default {
     this.list = info.infos || []
   },
   methods: {
-    toLearnDetails (url, type) {
+    toLearnDetails (item) {
+      const url = item.type === '1' ? item.url : item.img
+      const type = item.type === '1' ? 'MP4' : 'PDF'
       this.$router.push(`/learnDetails?url=${url}&type=${type}`)
     }
   }

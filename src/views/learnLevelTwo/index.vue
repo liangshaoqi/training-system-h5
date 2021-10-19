@@ -5,18 +5,18 @@
       <div>
         <div class="type-name">{{title}}</div>
         <div class="type-desc">{{list[0] && list[0].levelSecond}}</div>
-        <div class="learn-number">{{list.length || 0}}个专题 | {{(list[0] && list[0].infos.length) || 0}}个培训材料</div>
+        <div class="learn-number" v-if="title !== '通知'">{{list.length || 0}}个专题 | {{(list[0] && list[0].infos.length) || 0}}个培训材料</div>
       </div>
     </div>
     
     <div class="course-list">
-      <div class="title">课程列表</div>
+      <div class="title" v-if="title !== '通知'">课程列表</div>
 
       <div class="course-item" v-for="(item, idx) in list" :key="idx" @click="toDetails(idx)">
         <img :src="learn" alt="">
         <div>
           <div class="course-name">{{item.levelSecond}}</div>
-          <div class="course-number">共{{item.infos.length || 0}}个培训资料</div>
+          <div class="course-number" v-if="title !== '通知'">共{{item.infos.length || 0}}个培训资料</div>
         </div>
       </div>
     </div>

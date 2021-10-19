@@ -7,7 +7,7 @@
       <div class="info">
         <div><span>电子导游证</span>{{info.cardNo}}</div>
         <div><span>已学习时长</span>{{getTime(info.workingTime)}}</div>
-        <div><span>还需学习时长</span>{{getTime(24 * 60 - info.workingTime)}}</div>
+        <div><span>还需学习时长</span>{{getTime(16 * 60 - info.workingTime)}}</div>
         <div><span>培训状态</span>{{info.status}}</div>
       </div>
       <mt-button class="log-out" type="primary" @click="logOutFunc">退出当前账号</mt-button>
@@ -63,6 +63,7 @@ export default {
               this.$store.commit('setUserInfo', {})
               Toast('已退出，请重新登录')
               this.$router.push('/login')
+              localStorage.removeItem('closed')
             }
           })
         }

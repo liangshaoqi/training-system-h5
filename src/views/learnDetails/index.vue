@@ -1,6 +1,6 @@
 <template>
   <div class="learn-details-box">
-    <!-- <mt-header fixed title="2021年成德眉资导游人员线上培训系统">
+    <!-- <mt-header fixed title="2021年度成都导游人员培训服务平台">
       <router-link to="" slot="left">
         <mt-button icon="back" @click="$router.back(-1)"></mt-button>
       </router-link>
@@ -16,17 +16,16 @@
       allowfullscreen="true"
       width="100%"
       height="100%"
+      style="margin-top: .4rem"
     >
     </iframe>
     <div v-if="type === 'PDF'">
-      <img :src="url" style="width: 100%" alt="">
+      <img v-for="(item, idx) in url" :src="item" :key="idx" style="width: 100%; display: block;" alt="">
     </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'mint-ui';
-
 export default {
   name: 'learn-details',
   data () {
@@ -40,13 +39,17 @@ export default {
     const { url, type } = this.$route.query
 
     this.type = type
-    this.url = url
+    if (type === 'PDF') {
+      this.url = url.split(',')
+    } else {
+      this.url = url
+    }
   }
 }
 </script>
 
 <style lang="scss">
   .learn-details-box {
-    padding-top: .4rem;
+    // padding-top: .4rem;
   }
 </style>
