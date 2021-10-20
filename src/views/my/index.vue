@@ -2,7 +2,7 @@
   <div class="my-box">
     <div>
       <div class="name">
-        <span>{{info.name}}123123</span>
+        <span>{{info.name}}</span>
       </div>
       <div class="info">
         <div><span>电子导游证</span>{{info.cardNo}}</div>

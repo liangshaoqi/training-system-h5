@@ -40,7 +40,7 @@ export default {
             if (localStorage.getItem('closed')) return
             this.showAdvertise = 'show'
             localStorage.setItem('showAdvertise', 'show')
-          }, 10 * 1000);
+          }, 60 * 5 * 1000);
         }
       }
     },
