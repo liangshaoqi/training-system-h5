@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import advertiseImg from '../assets/advertise.png'
+import advertiseImg from '../assets/advertise.jpg'
 import closeImg from '../assets/close.png'
 export default {
   name: 'advertise',
@@ -34,10 +34,10 @@ export default {
     handleAdvertise () {
       if (localStorage.getItem('token')) {
         const path = this.$route.path;
-        const closed = localStorage.getItem('closed');
+        const closed = parseInt(localStorage.getItem('closed'));
         if (path !== '/login' && path !== '/regist' && !closed) {
           setTimeout(() => {
-            if (localStorage.getItem('closed')) return
+            if (parseInt(localStorage.getItem('closed'))) return
             this.showAdvertise = 'show'
             localStorage.setItem('showAdvertise', 'show')
           }, 60 * 5 * 1000);
