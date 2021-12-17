@@ -2,6 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import baseUrl from 'src/config/url_config';
 import { Toast } from 'mint-ui';
+import { session_get } from 'src/utils/index'
 // axios.defaults.baseURL = baseUrl;
 const service = axios.create({
   timeout: 60000, // 请求超时时间
@@ -13,12 +14,16 @@ service.interceptors.request.use(
     config.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     config.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
     config.headers.delete['Content-Type'] = 'application/x-www-form-urlencoded';
-    config.headers.token = localStorage.getItem('token');
+    config.headers.token = encodeURIComponent(localStorage.getItem('token'))
     // 判断请求方式
     // if(config.file){
     //   config.headers['Content-Type'] = 'multipart/form-data'
     //   config.params = qs.stringify(config.params)
     // }
+    const accountType = session_get('accountType')
+    if (accountType) {
+      config.headers['accountType'] = accountType
+    }
     if (config.pay) { // 支付接口formdata
       config.data = qs.stringify(config.data);
     }

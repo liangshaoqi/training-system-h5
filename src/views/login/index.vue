@@ -2,7 +2,7 @@
   <div class="login-box">
     <div class="login-bg">
       <div class="form-box">
-        <div class="app-title">2021年度成都导游人员<br/>培训服务平台</div>
+        <div class="app-title">2021年成都文旅培训平台</div>
 
         <div class="login-form">
           <mt-field
@@ -109,6 +109,7 @@ export default {
         if (code === '200') {
           await setTokenLoc(data.token || '');
           await setCardNo(data.cardNo || '');
+          sessionStorage.setItem('accountType', data.accountType)
           this.$store.commit('setUserInfo', data)
           this.$router.push('/my');
         }

@@ -7,7 +7,8 @@
       <div class="info">
         <div><span>电子导游证</span>{{info.cardNo}}</div>
         <div><span>已学习时长</span>{{getTime(info.workingTime)}}</div>
-        <div><span>还需学习时长</span>{{getTime(16 * 60 - info.workingTime)}}</div>
+        <div v-if="accountType == '1'"><span>还需学习时长</span>{{getTime(16 * 60 - info.workingTime)}}</div>
+        <div v-if="accountType == '2'"><span>还需学习时长</span>{{getTime(4 * 60 - info.workingTime)}}</div>
         <div><span>培训状态</span>{{info.status}}</div>
       </div>
       <mt-button class="log-out" type="primary" @click="logOutFunc">退出当前账号</mt-button>
@@ -19,13 +20,16 @@
 import { getExamResult } from 'api/my';
 import { logOut } from 'api/login';
 import { getCardNo } from 'utils/storage';
+import { session_get } from "utils";
 import { MessageBox, Toast } from 'mint-ui';
 
 export default {
   components: {
   },
   data () {
-    return {}
+    return {
+      accountType: session_get('accountType'),
+    }
   },
   computed: {
     info () {
