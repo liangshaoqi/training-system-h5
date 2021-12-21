@@ -7,14 +7,11 @@
 
     <div v-else>
       <mt-swipe class="learn-swiper">
-        <mt-swipe-item>
+        <mt-swipe-item v-if="accountType == '1'">
           <img class="learn-swiper-img" :src="Banner1" alt="">
         </mt-swipe-item>
-        <mt-swipe-item>
-          <img class="learn-swiper-img" :src="Banner1" alt="">
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <img class="learn-swiper-img" :src="Banner1" alt="">
+        <mt-swipe-item v-if="accountType == '2'">
+          <img class="learn-swiper-img" :src="Banner2" alt="">
         </mt-swipe-item>
       </mt-swipe>
 
@@ -36,7 +33,9 @@
 <script>
 import { getLearnList } from 'api/learn';
 import { getCardNo } from 'utils/storage';
+import { session_get } from "utils";
 import Banner1 from '../../assets/learn/banner1.png';
+import Banner2 from '../../assets/learn/banner2.png';
 import type1Icon from '../../assets/learn/type1.png';
 import type2Icon from '../../assets/learn/type2.png';
 import type3Icon from '../../assets/learn/type3.png';
@@ -46,9 +45,11 @@ export default {
     return {
       list: [],
       Banner1,
+      Banner2,
       type1Icon,
       type2Icon,
       type3Icon,
+      accountType: session_get('accountType'),
     }
   },
   mounted () {
