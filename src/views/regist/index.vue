@@ -17,10 +17,10 @@
       </mt-field>
     </div>
     <div class="regist-form common-form-box">
-      <div class="common-form-title">导游信息 <span>点击查验自动获取</span></div>
+      <div class="common-form-title">学员信息 <span>点击查验自动获取</span></div>
       <div class="info-item"><span>姓名</span>{{name || ''}}</div>
-      <div class="info-item"><span>电子导游证</span>{{guideID || ''}}</div>
-      <div class="info-item"><span>挂靠单位</span>{{company || ''}}</div>
+      <div class="info-item"><span>身份证号</span>{{cardNo || ''}}</div>
+      <div class="info-item"><span>所属单位</span>{{company || ''}}</div>
     </div>
     <div class="password-form common-form-box">
       <div class="common-form-title">设置密码</div>
@@ -87,7 +87,7 @@ export default {
     return {
       IDCard: '',
       name: '',
-      guideID: '',
+      cardNo: '',
       company: '',
       password: '',
       passwordConfirm: '',
@@ -111,11 +111,12 @@ export default {
       }
 
       getGuiderInfo({
-        cardNo: this.IDCard
+        cardNo: this.IDCard,
+        type: 2
       }).then((res) => {
         const data = res.data || {}
         this.name = data.name
-        this.guideID = data.guiderNo
+        this.cardNo = data.cardNo
         this.company = data.orgName
       })
     },
@@ -136,6 +137,7 @@ export default {
       register({
         cardNo: this.IDCard,
         password: this.password,
+        type: 2
       }).then(res => {
         if (res.code === '200') {
           localStorage.setItem('cardNo', this.IDCard)

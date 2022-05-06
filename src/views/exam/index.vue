@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="exam-item" v-for="(item, idx) in [1,2,3]" :key="idx">
+      <div class="exam-item" v-for="(item, idx) in [1,2,3]" :key="idx" @click="toTest">
         <i></i>
         <div class="exam-name">测试题</div>
         <span>去测试</span>
@@ -73,6 +73,11 @@
     methods: {
       getExamTypeList () {
         this.examTypeList = []
+      },
+      toTest() {
+        this.$router.push({
+          path: '/examDetails'
+        })
       }
     }
   }

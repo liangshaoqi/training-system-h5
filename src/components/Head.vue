@@ -1,11 +1,13 @@
 <template>
-  <mt-header fixed title="2021成都文旅培训平台"></mt-header>
+  <mt-header fixed :title="title"></mt-header>
 </template>
 
 <script>
 export default {
   data () {
-    return {}
+    return {
+      title: process.env.VUE_APP_TITLE
+    }
   },
   mounted() {
     // console.log('head')

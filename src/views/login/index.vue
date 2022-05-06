@@ -2,7 +2,7 @@
   <div class="login-box">
     <div class="login-bg">
       <div class="form-box">
-        <div class="app-title">2021年成都文旅培训平台</div>
+        <div class="app-title">{{title}}</div>
 
         <div class="login-form">
           <mt-field
@@ -93,6 +93,7 @@ export default {
       showPwd: false,
       ShowPwdIcon,
       HiddenPwdIcon,
+      title: process.env.VUE_APP_TITLE
     };
   },
   methods: {
@@ -102,7 +103,8 @@ export default {
       // });
       login({
         cardNo: this.cardNo,
-        password: this.password
+        password: this.password,
+        accountType: 2
       }).then(async res => {
         const { code, data = {} } = res;
 
