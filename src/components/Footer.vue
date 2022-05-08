@@ -1,8 +1,8 @@
 <template>
   <div class="footer-box">
     <mt-tabbar fixed v-model="selected">
-      <mt-tab-item id="/exam">
-        <img slot="icon" class="exam-icon" :src="selected === '/exam' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
+      <mt-tab-item id="/examDetails">
+        <img slot="icon" class="exam-icon" :src="selected === '/examDetails' ? require('../assets/tabbar/exam-active.png') : require('../assets/tabbar/exam.png')" alt="">
         考试
       </mt-tab-item>
       <mt-tab-item id="/learn">

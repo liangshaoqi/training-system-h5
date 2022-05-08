@@ -75,7 +75,8 @@ export default {
   methods: {
     getExamListFunc () {
       getExamList({
-        cardNo: localStorage.getItem('cardNo')
+        cardNo: localStorage.getItem('cardNo'),
+        type: 2
       }).then(res => {
         if (res.code === '200') {
           const list = res.data || {}
@@ -135,6 +136,7 @@ export default {
         Toast('题没做完，不能交卷')
         return
       }
+      console.log(this.formData)
 
       Toast('提交成功，请自行核对答案')
       this.showAnswer = true
