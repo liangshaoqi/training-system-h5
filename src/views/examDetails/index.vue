@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="choice">
+    <!-- <div class="choice">
       <h2>二、多选题</h2>
       <div class="single-box" v-for="(item, idx) in multipleList" :key="idx">
         <p>{{idx + 1}}、{{item.stem}}</p>
@@ -30,9 +30,9 @@
           :options="getOptions(item)">
         </mt-checklist>
       </div>
-    </div>
+    </div> -->
 
-    <div class="choice">
+    <!-- <div class="choice">
       <h2>三、判断题</h2>
       <div class="single-box" v-for="(item, idx) in judgmentList" :key="idx">
         <p>{{idx + 1}}、{{item.stem}}</p>
@@ -44,8 +44,10 @@
           :options="getOptions(item)">
         </mt-radio>
       </div>
+    </div> -->
+    <div v-if="showScore">
+      分数: <span style="color: red">{{score}}</span>
     </div>
-
     <mt-button type="primary" @click="submit" style="display: block; width: 80%; margin: .3rem auto;">交卷</mt-button>
 
   </div>
@@ -53,19 +55,22 @@
 
 <script>
 import { Toast } from 'mint-ui';
-import { getExamList } from 'api/exam';
+import { getExamList, saveExamScore } from 'api/exam';
 
 export default {
   components: {
   },
   data () {
     return {
-      singleList: [],
-      multipleList: [],
-      judgmentList: [],
+      singleList: [], // 单选
+      multipleList: [], // 多选
+      judgmentList: [], // 判断
       formData: {},
       multipleFormData: {},
-      showAnswer: false
+      showAnswer: false,
+      topicList: [], // 题目列表
+      score: 0,
+      showScore: false, // 展示成绩
     }
   },
   mounted() {
@@ -80,6 +85,7 @@ export default {
       }).then(res => {
         if (res.code === '200') {
           const list = res.data || {}
+          this.topicList = list
           const singleList = list.listSingle || [],
             multipleList = list.listMultiple || [],
             judgmentList = list.listJudge || []
@@ -136,10 +142,42 @@ export default {
         Toast('题没做完，不能交卷')
         return
       }
-      console.log(this.formData)
+      // console.log(this.formData)
+      // console.log(this.topicList.listSingle)
 
-      Toast('提交成功，请自行核对答案')
-      this.showAnswer = true
+      // Toast('提交成功，请自行核对答案')
+      let formData = this.formData
+      let listSingle = this.topicList.listSingle || [] // 项目需求只有单选题
+      // 组合数据
+      let dataGroup = []
+      listSingle.map((item, index) => {
+        for (let key in formData) {
+          if (item.uuid == key) {
+            dataGroup[index] = {
+              answer: item.answer,
+              cusanswer: formData[key],
+            }
+          }
+        }
+      })
+      let params = {
+        cardNo: localStorage.getItem('cardNo'),
+        type: 2,
+        buiderExaminations: dataGroup
+      }
+      saveExamScore(params).then((res) => {
+        if (res.code === '200') {
+          let { score } = res.data
+          this.score = score
+          this.showScore = true
+          if (score < 80) {
+            Toast('很遗憾,考试未通过, 分数:' + score)
+            return
+          }
+          Toast('恭喜你通过考试，分数为: ' +  score)
+        }
+      })
+      // this.showAnswer = true
     },
     hasDoneMultiple () {
       for (let i in this.multipleFormData) {

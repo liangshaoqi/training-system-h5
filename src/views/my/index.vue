@@ -8,9 +8,10 @@
         <div><span>身份证号码</span>{{info.cardNo}}</div>
         <div><span>已学习时长</span>{{getTime(info.workingTime)}}</div>
         <div v-if="accountType == '1'"><span>还需学习时长</span>{{getTime(16 * 60 - info.workingTime)}}</div>
-        <div v-if="accountType == '2'"><span>还需学习时长</span>{{getTime(4 * 60 - info.workingTime)}}</div>
+        <div v-if="accountType == '2'"><span>还需学习时长</span>{{getTime(18.75 * 60 - info.workingTime)}}</div>
         <div><span>培训状态</span>{{info.status}}</div>
-        <div><span>所属单位</span>{{''}}</div>
+        <div><span>所属单位</span>{{info.orgName}}</div>
+        <div><span>考试分数</span>{{info.score || 0}}</div>
       </div>
       <mt-button class="log-out" type="primary" @click="logOutFunc">退出当前账号</mt-button>
     </div>

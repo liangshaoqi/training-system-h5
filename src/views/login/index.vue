@@ -85,7 +85,7 @@ export default {
   name: "login",
   data() {
     return {
-      cardNo: localStorage.getItem('cardNo') || '',
+      cardNo: localStorage.getItem('cardNo') || '', // 513127200304180413
       password: '',
       showNote: false,
       passwordIcon,
