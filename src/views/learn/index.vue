@@ -35,7 +35,7 @@ import { getLearnList } from 'api/learn';
 import { getCardNo } from 'utils/storage';
 import { session_get } from "utils";
 import Banner1 from '../../assets/learn/banner1.png';
-import Banner2 from '../../assets/learn/banner2.png';
+import Banner2 from '../../assets/learn/banner2.jpg';
 import type1Icon from '../../assets/learn/type1.png';
 import type2Icon from '../../assets/learn/type2.png';
 import type3Icon from '../../assets/learn/type3.png';
