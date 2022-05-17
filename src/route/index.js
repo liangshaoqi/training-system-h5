@@ -11,7 +11,7 @@ import Learn from 'src/views/learn';
 import LearnList from 'src/views/learnList';
 import LearnLevelTwo from 'src/views/learnLevelTwo';
 import LearnDetails from 'src/views/learnDetails';
-import Exam from 'src/views/exam';
+// import Exam from 'src/views/exam';
 import ExamDetails from 'src/views/examDetails';
 import My from 'src/views/my';
 
@@ -27,8 +27,8 @@ const routes = [
         component: Learn,
       },
       {
-        path: '/exam',
-        component: Exam,
+        path: '/examDetails',
+        component: ExamDetails,
       },
       {
         path: '/my',
@@ -64,10 +64,10 @@ const routes = [
     path: '/learnDetails',
     component: LearnDetails,
   },
-  {
-    path: '/examDetails',
-    component: ExamDetails,
-  },
+  // {
+  //   path: '/examDetails',
+  //   component: ExamDetails,
+  // },
 ];
 const router = new Router({
   // mode: 'history',
